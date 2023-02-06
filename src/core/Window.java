@@ -12,23 +12,27 @@ import java.awt.image.BufferStrategy;
 public class Window extends Canvas implements Runnable{
 
     private static final long serialVersionUID = 1L;
+
     private Thread thread;
     private boolean running = false;
     private final keylistener Keylistener = new keylistener(this);
 
     public LevelHandler level = new LevelHandler(this);
 
-
+    public int FrameWidth, FrameHeight;
     //GameObjects
     public Player player = new Player(this,100, 100, 42, 42);
     //GameObjects
 
 
 
-    public Window( String Title, int Heigth, int Width){
+    public Window( String Title, int Width, int Heigth){
         JFrame frame = new JFrame(Title);
 
-        frame.setSize(Heigth, Width);
+
+        frame.setSize(Width, Heigth);
+        FrameHeight = Heigth;
+        FrameWidth = Width;
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setVisible(true);
@@ -38,6 +42,7 @@ public class Window extends Canvas implements Runnable{
 
 
     public void start(){
+        System.out.println(getWidth());
         thread = new Thread(this);
         thread.start();
         running = true;

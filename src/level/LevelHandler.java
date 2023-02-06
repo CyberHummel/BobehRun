@@ -23,7 +23,7 @@ public class LevelHandler {
 
     private int seed;
 
-    public int cameraX, cameraY;
+    public double cameraX, cameraY;
 
     //vars
 
@@ -34,24 +34,74 @@ public class LevelHandler {
         seed = r.nextInt();
 
         //add in player
-        player = new Player(w, 100, 100, 42, 42);
+
+
        items.add(new Plattform(Obstacle.Platform,100, 300 ,100, 4, Color.CYAN));
-       items.add(new Plattform(Obstacle.Platform, 0, floorHeight+41,10000,100, Color.BLACK));
+       items.add(new Plattform(Obstacle.Platform, -500, floorHeight+41,10000,100, Color.BLACK));
+       player = new Player(w, 100, 100, 42, 42);
     }
 
     public void Render(Graphics g){
-        player.Render(g);
-        g.translate(cameraX, cameraY);
+        g.translate((int) cameraX, (int) cameraY);
+
         for(Obstacle i : items){
             i.Render(g);
         }
-        g.translate(cameraX, cameraY);
+        player.Render(g);
+        g.translate((int) cameraX, (int) cameraY);
     }
 
     public void tick(){
-        for(Obstacle i : items){
-            i.tick();
+        System.out.println(player.x);
+        if(player.x == w.FrameWidth){
+            player.x = 0;
+            cameraX = player.x;
+            if(player.velx < 0 && player.vely != 0){
+                w.level.cameraX += +w.level.player.speed+w.player.velx;
+                for(Obstacle i : items){
+                    i.tick();
+                }
+                player.tick();
+            }
+
+            else if(player.velx > 0 && player.vely != 0){
+                w.level.cameraX += -w.level.player.speed-w.player.velx;
+                for(Obstacle i : items){
+                    i.tick();
+                }
+                player.tick();
+            }
+            for(Obstacle i : items){
+                i.tick();
+            }
+            player.tick();
         }
-        player.tick();
+
+        else{
+            if(player.velx < 0 && player.vely != 0){
+                w.level.cameraX += +w.level.player.speed+w.player.velx;
+                for(Obstacle i : items){
+                    i.tick();
+                }
+                player.tick();
+            }
+
+            else if(player.velx > 0 && player.vely != 0){
+                w.level.cameraX += -w.level.player.speed-w.player.velx;
+                for(Obstacle i : items){
+                    i.tick();
+                }
+                player.tick();
+            }
+
+
+
+
+            for(Obstacle i : items){
+                i.tick();
+            }
+            player.tick();
+        }
+
     }
 }
