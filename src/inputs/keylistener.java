@@ -39,19 +39,10 @@ public class keylistener implements KeyListener {
         }
 
         else if(key == KeyEvent.VK_SPACE){
-            if(MovingLeft){
-                w.level.cameraX -=1;
-                if(w.level.player.vely == 0.1){
-                    w.level.player.vely = -w.level.player.JumpVelocity;
-                }
-            }
-            else{
-                if(w.level.player.vely == 0.1){
-                    w.level.player.vely = -w.level.player.JumpVelocity;
-                    w.level.cameraX +=1;
-                }
-            }
 
+            if(w.level.player.vely == 0.1){
+                w.level.player.vely = -w.level.player.JumpVelocity;
+            }
 
 
 
