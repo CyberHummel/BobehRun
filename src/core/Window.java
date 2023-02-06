@@ -14,7 +14,7 @@ public class Window extends Canvas implements Runnable{
     private static final long serialVersionUID = 1L;
     private Thread thread;
     private boolean running = false;
-    private keylistener Keylistener = new keylistener(this);
+    private final keylistener Keylistener = new keylistener(this);
 
     public LevelHandler level = new LevelHandler();
 
@@ -65,6 +65,7 @@ public class Window extends Canvas implements Runnable{
         g.fillRect(0,0, this.getWidth(), this.getHeight());
 
         player.Render(g);
+        level.Render(g);
 
         g.setColor(Color.BLACK);
         g.fillRect(0, level.floorHeight +41, this.getWidth(), this.getHeight());
@@ -73,6 +74,7 @@ public class Window extends Canvas implements Runnable{
         g.dispose();
     }
     public void tick(){
+        level.tick();
         player.tick();
     }
 
