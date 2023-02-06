@@ -1,6 +1,6 @@
 package core;
 
-import Objects.Player;
+import objects.Player;
 import inputs.keylistener;
 import level.LevelHandler;
 
@@ -16,7 +16,7 @@ public class Window extends Canvas implements Runnable{
     private boolean running = false;
     private final keylistener Keylistener = new keylistener(this);
 
-    public LevelHandler level = new LevelHandler();
+    public LevelHandler level = new LevelHandler(this);
 
 
     //GameObjects
@@ -64,7 +64,6 @@ public class Window extends Canvas implements Runnable{
         g.setColor(Color.WHITE);
         g.fillRect(0,0, this.getWidth(), this.getHeight());
 
-        player.Render(g);
         level.Render(g);
 
         g.setColor(Color.BLACK);
@@ -75,7 +74,6 @@ public class Window extends Canvas implements Runnable{
     }
     public void tick(){
         level.tick();
-        player.tick();
     }
 
     @Override

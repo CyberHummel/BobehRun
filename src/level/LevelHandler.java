@@ -1,7 +1,8 @@
 package level;
-
-import Objects.Plattform;
-import Objects.Item;
+import core.Window;
+import objects.Plattform;
+import objects.Obstacle;
+import objects.Player;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -11,28 +12,45 @@ public class LevelHandler {
     //Vars
     public double Gravity = 8;
 
-    public LinkedList<Item> items = new LinkedList<Item>();
+    public Player player = null;
+
+    public LinkedList<Obstacle> items = new LinkedList<Obstacle>();
 
     public int floorHeight = 400;
-    //vars
+
+     Window w;
+
+
     private int seed;
+
+    public int cameraX, cameraY;
+
+    //vars
+
     //runs when lvl is created
-    public LevelHandler(){
+    public LevelHandler(Window w){
+        this.w=w;
         Random r = new Random();
         seed = r.nextInt();
 
-       items.add(new Plattform(Item.Platform,100, 300 ,100, 4, Color.CYAN));
+        //add in player
+        player = new Player(w, 100, 100, 42, 42);
+       items.add(new Plattform(Obstacle.Platform,100, 300 ,100, 4, Color.CYAN));
     }
 
     public void Render(Graphics g){
-        for(Item i : items){
+        player.Render(g);
+        g.translate(cameraX, cameraY);
+        for(Obstacle i : items){
             i.Render(g);
         }
+        g.translate(cameraX, cameraY);
     }
 
     public void tick(){
-        for(Item i : items){
+        for(Obstacle i : items){
             i.tick();
         }
+        player.tick();
     }
 }

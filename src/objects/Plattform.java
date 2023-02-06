@@ -1,9 +1,9 @@
-package Objects;
+package objects;
 
 
 import java.awt.*;
 
-public class Plattform extends Item {
+public class Plattform extends Obstacle {
     int height;
     int width;
     int x;

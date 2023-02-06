@@ -1,6 +1,7 @@
 package inputs;
 
 import core.Window;
+import level.LevelHandler;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -26,19 +27,31 @@ public class keylistener implements KeyListener {
         int key = e.getKeyCode();
 
         if(key == KeyEvent.VK_D){
+            w.level.cameraX +=1;
             MovingLeft = false;
-            w.player.velx = w.player.speed;
+            w.level.player.velx = w.level.player.speed;
         }
 
         else if(key == KeyEvent.VK_A){
+            w.level.cameraX -=1;
             MovingLeft = true;
-            w.player.velx = -w.player.speed;
+            w.level.player.velx = -w.level.player.speed;
         }
 
         else if(key == KeyEvent.VK_SPACE){
-            if(w.player.vely == 0.1){
-                w.player.vely = -w.player.JumpVelocity;
+            if(MovingLeft){
+                w.level.cameraX -=1;
+                if(w.level.player.vely == 0.1){
+                    w.level.player.vely = -w.level.player.JumpVelocity;
+                }
             }
+            else{
+                if(w.level.player.vely == 0.1){
+                    w.level.player.vely = -w.level.player.JumpVelocity;
+                    w.level.cameraX +=1;
+                }
+            }
+
 
 
 
@@ -50,11 +63,11 @@ public class keylistener implements KeyListener {
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
         if(key == KeyEvent.VK_D && !MovingLeft){
-            w.player.velx = 0;
+            w.level.player.velx = 0;
         }
 
         if(key == KeyEvent.VK_A && MovingLeft){
-            w.player.velx = 0;
+            w.level.player.velx = 0;
         }
 
 

@@ -1,4 +1,4 @@
-package Objects;
+package objects;
 import core.Window;
 
 import java.awt.*;
