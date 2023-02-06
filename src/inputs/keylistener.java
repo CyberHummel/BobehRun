@@ -36,6 +36,11 @@ public class keylistener implements KeyListener {
         }
 
         else if(key == KeyEvent.VK_SPACE){
+            if(w.player.vely == 0.1){
+                w.player.vely = -w.player.JumpVelocity;
+            }
+
+
 
         }
 
@@ -50,10 +55,6 @@ public class keylistener implements KeyListener {
 
         if(key == KeyEvent.VK_A && MovingLeft){
             w.player.velx = 0;
-        }
-
-        else if(key == KeyEvent.VK_SPACE ){
-
         }
 
 

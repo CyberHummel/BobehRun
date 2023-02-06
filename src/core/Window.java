@@ -2,6 +2,7 @@ package core;
 
 import Objects.Player;
 import inputs.keylistener;
+import level.LevelHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,8 +16,11 @@ public class Window extends Canvas implements Runnable{
     private boolean running = false;
     private keylistener Keylistener = new keylistener(this);
 
+    public LevelHandler level = new LevelHandler();
+
+
     //GameObjects
-    public Player player = new Player(100, 100, 64, 64);
+    public Player player = new Player(this,100, 100, 42, 42);
     //GameObjects
 
 
@@ -48,6 +52,28 @@ public class Window extends Canvas implements Runnable{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    public void  Render(){
+        BufferStrategy bs = this.getBufferStrategy();
+
+        if(bs == null){
+            this.createBufferStrategy(2);
+            bs = this.getBufferStrategy();
+        }
+        Graphics g = bs.getDrawGraphics();
+        g.setColor(Color.WHITE);
+        g.fillRect(0,0, this.getWidth(), this.getHeight());
+
+        player.Render(g);
+
+        g.setColor(Color.BLACK);
+        g.fillRect(0, level.floorHeight +41, this.getWidth(), this.getHeight());
+
+        bs.show();
+        g.dispose();
+    }
+    public void tick(){
+        player.tick();
     }
 
     @Override
@@ -85,24 +111,7 @@ public class Window extends Canvas implements Runnable{
     }
 
     //update Window
-    public void tick(){
-        player.tick();
-    }
+
     //paint window
-    public void  Render(){
-        BufferStrategy bs = this.getBufferStrategy();
 
-        if(bs == null){
-            this.createBufferStrategy(2);
-            bs = this.getBufferStrategy();
-        }
-        Graphics g = bs.getDrawGraphics();
-        g.setColor(Color.WHITE);
-        g.fillRect(0,0, this.getWidth(), this.getHeight());
-
-        player.Render(g);
-
-        bs.show();
-        g.dispose();
-    }
 }
