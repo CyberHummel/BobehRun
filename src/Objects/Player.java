@@ -38,8 +38,9 @@ public class Player {
         }
      }
 
+
      public void Render(Graphics g){
-        g.setColor(Color.BLUE);
+         g.setColor(Color.BLUE);
        g.fillRect((int)x, (int) y, width, height);
      }
 }
