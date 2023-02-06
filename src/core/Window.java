@@ -66,9 +66,6 @@ public class Window extends Canvas implements Runnable{
 
         level.Render(g);
 
-        g.setColor(Color.BLACK);
-        g.fillRect(0, level.floorHeight +41, this.getWidth(), this.getHeight());
-
         bs.show();
         g.dispose();
     }

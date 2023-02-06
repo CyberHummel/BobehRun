@@ -27,13 +27,13 @@ public class keylistener implements KeyListener {
         int key = e.getKeyCode();
 
         if(key == KeyEvent.VK_D){
-            w.level.cameraX +=1;
+            w.level.cameraX += w.level.player.velx+w.player.speed;
             MovingLeft = false;
             w.level.player.velx = w.level.player.speed;
         }
 
         else if(key == KeyEvent.VK_A){
-            w.level.cameraX -=1;
+            w.level.cameraX += w.level.player.velx-w.level.player.speed;
             MovingLeft = true;
             w.level.player.velx = -w.level.player.speed;
         }

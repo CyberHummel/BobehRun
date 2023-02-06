@@ -36,6 +36,7 @@ public class LevelHandler {
         //add in player
         player = new Player(w, 100, 100, 42, 42);
        items.add(new Plattform(Obstacle.Platform,100, 300 ,100, 4, Color.CYAN));
+       items.add(new Plattform(Obstacle.Platform, 0, floorHeight+41,10000,100, Color.BLACK));
     }
 
     public void Render(Graphics g){
