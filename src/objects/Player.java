@@ -22,6 +22,7 @@ public class Player {
      }
 
     public void tick(){
+        System.out.println(x);
         if((w.FrameWidth/2) == x && !w.Keylistener.MovingLeft){
             x = w.FrameWidth/2;
             if(w.Keylistener.Moving){
@@ -34,6 +35,11 @@ public class Player {
         else{
             x+=velx;
             w.level.updateObstacles(0);
+        }
+
+        if(x <= 0 && w.Keylistener.MovingLeft){
+            x = 0.0;
+
         }
 
 
