@@ -1,5 +1,6 @@
 package objects;
 import core.Window;
+import level.LevelHandler;
 
 import java.awt.*;
 
@@ -9,7 +10,6 @@ public class Player {
     public double x, y;
     public double velx, vely;
     public double JumpVelocity = 4;
-
     public int speed = 2;
 
 
@@ -22,7 +22,14 @@ public class Player {
      }
 
     public void tick(){
-        x+=velx;
+        if((w.FrameWidth/2) == x && !w.Keylistener.MovingLeft){
+            x = w.FrameWidth/2;
+            w.level.updateObstacles(-2);
+        }
+        else{
+            x+=velx;
+        }
+
 
         if(y+vely < w.level.floorHeight){
             y+=vely;

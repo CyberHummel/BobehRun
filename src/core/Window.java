@@ -15,7 +15,7 @@ public class Window extends Canvas implements Runnable{
 
     private Thread thread;
     private boolean running = false;
-    private final keylistener Keylistener = new keylistener(this);
+    public final keylistener Keylistener = new keylistener(this);
 
     public LevelHandler level = new LevelHandler(this);
 
@@ -34,7 +34,7 @@ public class Window extends Canvas implements Runnable{
         FrameHeight = Heigth;
         FrameWidth = Width;
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
+        frame.setResizable(true);
         frame.setVisible(true);
         frame.add(this);
         frame.setBackground(Color.white);

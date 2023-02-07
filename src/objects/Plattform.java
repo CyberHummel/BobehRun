@@ -20,10 +20,14 @@ public class Plattform extends Obstacle {
         this.height=height;
     }
 
+    @Override
+    public void updateCords(int speed) {
+        this.x -= speed;
+    }
+
     public void Render(Graphics g) {
         g.setColor(c);
         g.fillRect(x, y, width, height);
-
     }
 
     public void tick() {

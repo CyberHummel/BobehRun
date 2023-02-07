@@ -1,13 +1,10 @@
 package inputs;
 
 import core.Window;
-import level.LevelHandler;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class keylistener implements KeyListener {
-
     private Window w;
 
 
@@ -22,19 +19,18 @@ public class keylistener implements KeyListener {
 
 
 
-    private boolean MovingLeft = false;
+    public boolean MovingLeft = false;
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
 
         if(key == KeyEvent.VK_D){
-            w.level.cameraX += -w.level.player.speed-w.player.velx;
-            MovingLeft = false;
             w.level.player.velx = w.level.player.speed;
+            MovingLeft = false;
+
 
         }
 
         else if(key == KeyEvent.VK_A){
-            w.level.cameraX += +w.level.player.speed+w.player.velx;
             MovingLeft = true;
             w.level.player.velx = -w.level.player.speed;
 
