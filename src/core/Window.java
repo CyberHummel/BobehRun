@@ -18,8 +18,10 @@ public class Window extends Canvas implements Runnable{
     public final keylistener Keylistener = new keylistener(this);
 
     public LevelHandler level = new LevelHandler(this);
+    JLabel test = new JLabel();
 
     public int FrameWidth, FrameHeight;
+    public int FPS;
     //GameObjects
     public Player player = new Player(this,100, 100, 42, 42);
     //GameObjects
@@ -36,18 +38,16 @@ public class Window extends Canvas implements Runnable{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(true);
         frame.setVisible(true);
+
         frame.add(this);
         frame.setBackground(Color.white);
     }
 
 
     public void start(){
-        System.out.println(getWidth());
         thread = new Thread(this);
         thread.start();
         running = true;
-
-
     }
 
     public void stop() {
@@ -69,6 +69,7 @@ public class Window extends Canvas implements Runnable{
         g.setColor(Color.WHITE);
         g.fillRect(0,0, this.getWidth(), this.getHeight());
 
+
         level.Render(g);
 
         bs.show();
@@ -76,6 +77,7 @@ public class Window extends Canvas implements Runnable{
     }
     public void tick(){
         level.tick();
+
     }
 
     @Override
@@ -98,12 +100,16 @@ public class Window extends Canvas implements Runnable{
                 updates++;
                 delta--;
             }
+
+
             Render();
             frames++;
 
             if(System.currentTimeMillis() - timer >1000){
                 timer += 1000;
                 System.out.println("FPS:" + frames + "Ticks:" + updates);
+                FPS = frames;
+                //DUI.updateLabels(FPS);
                 frames = 0;
                 updates = 0;
             }

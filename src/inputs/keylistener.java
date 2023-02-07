@@ -42,7 +42,7 @@ public class keylistener implements KeyListener {
 
         else if(key == KeyEvent.VK_SPACE){
 
-            if(w.level.player.vely == 0.1){
+            if(w.level.player.Jumpable){
                 w.level.player.vely = -w.level.player.JumpVelocity;
             }
 

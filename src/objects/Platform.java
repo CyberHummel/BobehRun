@@ -3,14 +3,14 @@ package objects;
 
 import java.awt.*;
 
-public class Plattform extends Obstacle {
+public class Platform extends Obstacle {
     int height;
     int width;
     int x;
     int y;
     Color c;
 
-    public Plattform(byte ID, int x, int y, int width, int height, Color c) {
+    public Platform(byte ID, int x, int y, int width, int height, Color c) {
         super(ID);
 
         this.c=c;

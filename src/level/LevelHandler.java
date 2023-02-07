@@ -1,12 +1,11 @@
 package level;
 import core.Window;
-import objects.Plattform;
+import objects.Platform;
 import objects.Obstacle;
 import objects.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Random;
 
 public class LevelHandler {
@@ -31,13 +30,9 @@ public class LevelHandler {
         this.w=w;
         Random r = new Random();
         seed = r.nextInt();
-
-        //add in player
-
-
-       items.add(new Plattform(Obstacle.Platform,100, 300 ,100, 4, Color.CYAN));
-       items.add(new Plattform(Obstacle.Platform,1000, 300 ,100, 4, Color.RED));
-       items.add(new Plattform(Obstacle.Platform, -500, floorHeight+41,10000,100, Color.BLACK));
+       items.add(new Platform(Obstacle.Platform,100, 400 ,100, 4, Color.CYAN));
+       items.add(new Platform(Obstacle.Platform,300, 350 ,100, 4, Color.RED));
+       items.add(new Platform(Obstacle.Platform, -500, floorHeight+41,10000,100, Color.BLACK));
        player = new Player(w, 100, 100, 42, 42);
     }
 
