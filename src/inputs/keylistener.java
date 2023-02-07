@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 
 public class keylistener implements KeyListener {
     private Window w;
+    public boolean Moving = false;
 
 
     public keylistener(Window w ){
@@ -24,6 +25,7 @@ public class keylistener implements KeyListener {
         int key = e.getKeyCode();
 
         if(key == KeyEvent.VK_D){
+            Moving = true;
             w.level.player.velx = w.level.player.speed;
             MovingLeft = false;
 
@@ -31,8 +33,10 @@ public class keylistener implements KeyListener {
         }
 
         else if(key == KeyEvent.VK_A){
+            Moving = true;
             MovingLeft = true;
             w.level.player.velx = -w.level.player.speed;
+
 
         }
 
@@ -52,11 +56,15 @@ public class keylistener implements KeyListener {
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
         if(key == KeyEvent.VK_D && !MovingLeft){
+            Moving = false;
             w.level.player.velx = 0;
+
         }
 
         if(key == KeyEvent.VK_A && MovingLeft){
+            Moving = false;
             w.level.player.velx = 0;
+
         }
 
 

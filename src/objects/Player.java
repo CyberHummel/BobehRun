@@ -24,10 +24,16 @@ public class Player {
     public void tick(){
         if((w.FrameWidth/2) == x && !w.Keylistener.MovingLeft){
             x = w.FrameWidth/2;
-            w.level.updateObstacles(-2);
+            if(w.Keylistener.Moving){
+                w.level.updateObstacles(-2);
+            }
+            else{
+                w.level.updateObstacles(0);
+            }
         }
         else{
             x+=velx;
+            w.level.updateObstacles(0);
         }
 
 
