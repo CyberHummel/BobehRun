@@ -7,6 +7,7 @@ import level.LevelHandler;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.io.IOException;
 
 
 public class Window extends Canvas implements Runnable{
@@ -28,7 +29,7 @@ public class Window extends Canvas implements Runnable{
 
 
 
-    public Window( String Title, int Width, int Heigth){
+    public Window( String Title, int Width, int Heigth) throws IOException {
         JFrame frame = new JFrame(Title);
 
 

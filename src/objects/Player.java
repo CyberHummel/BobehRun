@@ -4,6 +4,7 @@ import core.Window;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 
@@ -18,7 +19,7 @@ public class Player {
     public boolean falling = true;
     public boolean Jumpable;
 
-    BufferedImage player = ImageIO.read(new File( "imgs/New Piskel.png"));
+    private BufferedImage player;
 
 
     public Player(Window w, int x, int y, int width, int height) throws IOException {            //x=StartX, y=StartY
@@ -98,10 +99,19 @@ public class Player {
 
 
 
-     public void Render(Graphics g){
-         g.setColor(Color.BLUE);
-         g.fillRect((int)x, (int) y, width, height);
-         g.drawImage(player, )
+     public void Render(Graphics g) {
+         Graphics2D g2 = (Graphics2D) g;
+         //g2.fillRect((int)x, (int) y, width, height);
+
+         Image resplayer;
+         try {
+             player = ImageIO.read(getClass().getResourceAsStream("/player.png"));
+             resplayer = player.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+         } catch (IOException e) {
+             throw new RuntimeException(e);
+         }
+
+         g2.drawImage(resplayer, (int) x, (int) y, null);
 
      }
 }
