@@ -14,7 +14,9 @@ import java.util.Random;
 public class LevelHandler {
     //Vars
 
-    private BufferedImage[] imgs;
+    private String path_Dirt = "/Dirt.png";
+    private String path_Grass = "/Grass-1.png.png";
+    private  String path_StoneBricks = "/StoneBricks_Long.png";
     public double Gravity = 8;
 
     public Player player = null;
@@ -35,13 +37,12 @@ public class LevelHandler {
         this.w=w;
         Random r = new Random();
         seed = r.nextInt();
-       items.add(new Platform(Obstacle.Platform,100, 400 ,100, 4, Color.CYAN));
-       imgs[1] = ImageIO.read(getClass().getResourceAsStream("/player.png"));
-       items.add(new Platform(Obstacle.Platform,300, 350 ,100, 4, Color.RED));
+       items.add(new Platform(Obstacle.Platform,100, 400 ,84, 84, path_Grass, path_Dirt));
+       items.add(new Platform(Obstacle.Platform,300, 350 ,84, 84, path_Grass, path_Dirt));
 
-        items.add(new Platform(Obstacle.Platform,500, 300 ,100, 4, Color.GREEN));
+       items.add(new Platform(Obstacle.Platform,500, 300 ,84, 84, path_Grass, path_Dirt));
 
-       items.add(new Platform(Obstacle.Platform, -500, floorHeight+41,10000,100, Color.BLACK));
+       items.add(new Platform(Obstacle.Platform, -500, floorHeight+41,10000,100,path_StoneBricks, path_StoneBricks));
        player = new Player(w, 100, 100, 84, 84);
     }
 
@@ -57,9 +58,6 @@ public class LevelHandler {
             i.Render(g);
         }
 
-        for(BufferedImage i : imgs){
-            g2.drawImage(i, (int) x, (int) y, null);
-        }
         player.Render(g);
     }
 

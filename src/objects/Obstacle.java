@@ -1,6 +1,7 @@
 package objects;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public abstract class Obstacle {
     //OBJ IDS
@@ -9,6 +10,7 @@ public abstract class Obstacle {
     protected byte ID;
     protected int x;
 
+    private BufferedImage texture;
     public Obstacle(byte ID){
         this.ID=ID;
     }
