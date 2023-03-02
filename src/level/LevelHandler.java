@@ -1,25 +1,26 @@
 package level;
+import core.CollissionDetection;
 import core.Window;
-import objects.Platform;
+import core.Tile_manager;
 import objects.Obstacle;
 import objects.Player;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class LevelHandler {
     //Vars
-
+    private double deathY = 800;
     private String path_Dirt = "/Dirt.png";
-    private String path_Grass = "/Grass-1.png.png";
+    private String path_Grass = "/Grass.png";
     private  String path_StoneBricks = "/StoneBricks_Long.png";
     public double Gravity = 8;
 
     public Player player = null;
+    Tile_manager tileM = new Tile_manager(this);
+    CollissionDetection cDetection = new CollissionDetection();
 
     public ArrayList<Obstacle> items = new ArrayList<Obstacle>();
 
@@ -37,10 +38,10 @@ public class LevelHandler {
         this.w=w;
         Random r = new Random();
         seed = r.nextInt();
-       items.add(new Platform(Obstacle.Platform,100, 400 ,84, 84, path_Grass, path_Dirt));
-       items.add(new Platform(Obstacle.Platform,300, 350 ,84, 84, path_Grass, path_Dirt));
+       //items.add(new Platform(Obstacle.Platform,100, 400 ,48, 48, path_Grass, path_Dirt));
+       //items.add(new Platform(Obstacle.Platform,300, 350 ,48, 48, path_Grass, path_Dirt));
 
-       items.add(new Platform(Obstacle.Platform,500, 300 ,84, 84, path_Grass, path_Dirt));
+       //items.add(new Platform(Obstacle.Platform,500, 300 ,48, 48, path_Grass, path_Dirt));
 
        player = new Player(w, 100, 100, 84, 84);
     }
@@ -53,18 +54,25 @@ public class LevelHandler {
 
 
     public void Render(Graphics g){
-        for(Obstacle i : items){
-            i.Render(g);
-        }
+        Graphics2D g2 = (Graphics2D) g;
+        tileM.draw(g2, w);
+
 
         player.Render(g);
     }
 
     public void tick(){
-            for(Obstacle i : items){
-                i.tick();
-            }
+
+            player.collisionOn = false;
+
+            //cDetection.collissionDetectTile(player, );
+            //for(Obstacle i : items){
+                //i.tick();
+            //}
             player.tick();
+            if(player.y >= deathY){     //Death Zone
+              System.exit(0);
+            }
         }
 
     }

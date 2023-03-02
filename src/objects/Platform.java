@@ -40,13 +40,7 @@ public class Platform extends Obstacle {
         this.x -= speed;
     }
 
-    @Override
     public void Render(Graphics g) {
-
-    }
-
-
-    public void Render(Graphics2D g) {
         Graphics2D g2 = (Graphics2D) g;
         try {
             textureMain= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(path_textureMain)));
@@ -59,11 +53,8 @@ public class Platform extends Obstacle {
         maxWidth = textureMain.getWidth();
         maxHeight = 88;
 
-        //g.setColor(c);
-        System.out.println("Twest");
         g2.drawImage(textureMain, x, y, null);
         g2.drawImage(textureDown, x, ((y+maxHeight )- 5), null);
-        //g.fillRect(x, y, width, height);
     }
 
     public void tick() {

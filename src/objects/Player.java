@@ -17,18 +17,21 @@ public class Player {
     public boolean falling = true;
     public boolean Jumpable;
 
-    private BufferedImage player;
+    public Rectangle hitBox;
+    public boolean collisionOn = false;
 
 
-    public Player(Window w, int x, int y, int width, int height) throws IOException {            //x=StartX, y=StartY
+    public Player(Window w, int x, int y, int width, int height) {            //x=StartX, y=StartY
         this.w = w;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        hitBox = new Rectangle(x+8, y + 16, 32, 32);
     }
 
     public void tick() {
+
         if ((w.FrameWidth / 2) == x && !w.Keylistener.MovingLeft) {
             x = w.FrameWidth / 2;
             if (w.Keylistener.Moving) {
@@ -55,10 +58,10 @@ public class Player {
             vely = 0;
         }
 
-        Collision();
+        //Collision();
      }
 
-     public void Collision(){
+     /*public void Collision(){
         Jumpable = false;
         falling = true;
         for(Obstacle i : w.level.items){
@@ -66,7 +69,7 @@ public class Player {
                 Platform p = (Platform)i;
 
                     //CollisionDetec.
-                    if(new Rectangle((int)x+ (int) velx, (int) y+ (int)vely,width,height).intersects(p.x, p.y, p.width, p.height)){
+                    if(new Rectangle((int)x+ (int) velx, (int) y+ (int)vely,width,height).intersects(p.x, p.y, (p.width - 20), (p.height - 20))){
                         if  (y+height <= p.y+1){
                                 falling = false;
                                 if (vely > 0) {
@@ -93,7 +96,7 @@ public class Player {
 
             }
         }
-     }
+     }*/
 
 
 
@@ -103,7 +106,7 @@ public class Player {
 
          Image resplayer;
          try {
-             player = ImageIO.read(getClass().getResourceAsStream("/player.png"));
+             BufferedImage player = ImageIO.read(getClass().getResourceAsStream("/player.png"));
              resplayer = player.getScaledInstance(width, height, Image.SCALE_SMOOTH);
          } catch (IOException e) {
              throw new RuntimeException(e);

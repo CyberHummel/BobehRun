@@ -67,14 +67,16 @@ public class Window extends Canvas implements Runnable{
             bs = this.getBufferStrategy();
         }
         Graphics g = bs.getDrawGraphics();
-        g.setColor(Color.WHITE);
-        g.fillRect(0,0, this.getWidth(), this.getHeight());
+
+        Graphics2D g2 = (Graphics2D) g ;
+        g2.setColor(Color.WHITE);
+        g2.fillRect(0,0, this.getWidth(), this.getHeight());
 
 
         level.Render(g);
 
         bs.show();
-        g.dispose();
+        g2.dispose();
     }
     public void tick(){
         level.tick();
