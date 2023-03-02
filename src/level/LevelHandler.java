@@ -42,7 +42,6 @@ public class LevelHandler {
 
        items.add(new Platform(Obstacle.Platform,500, 300 ,84, 84, path_Grass, path_Dirt));
 
-       items.add(new Platform(Obstacle.Platform, -500, floorHeight+41,10000,100,path_StoneBricks, path_StoneBricks));
        player = new Player(w, 100, 100, 84, 84);
     }
 
