@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
-
+//gesamte Classe seber
 
 public class Window extends Canvas implements Runnable{
 
