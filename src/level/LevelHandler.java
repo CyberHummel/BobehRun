@@ -70,9 +70,7 @@ public class LevelHandler {
                 //i.tick();
             //}
             player.tick();
-            if(player.y >= deathY){     //Death Zone
-              System.exit(0);
-            }
+            ////// }
         }
 
     }
