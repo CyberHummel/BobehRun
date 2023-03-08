@@ -8,7 +8,7 @@ import objects.Player;
 import java.awt.*;
 import java.io.IOException;
 
-import Tile_manager;
+
 //gesamte Classe seber
 public class LevelHandler {
     //Vars
@@ -25,6 +25,7 @@ public class LevelHandler {
     public int floorHeight = 400;
 
      Window w;
+     Tile_manager tM = new Tile_manager(this);
 
 
     private int seed;
@@ -53,7 +54,7 @@ public class LevelHandler {
     public void tick(){
             player.collisionOn = true;
             player.tick();
-            for
+            for(tM.tile.length)
             cDetection.collissionDetectTile(player,);
         }
 

@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 
 public class Tile_manager {
     LevelHandler lH;
-    Tile[] tile;
+    public Tile[] tile;
 
 
 
