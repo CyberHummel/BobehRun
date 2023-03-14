@@ -50,9 +50,7 @@ public class LevelHandler {
     public void tick(){
         //Vars
         double deathY = 800;
-        if(player.y >= deathY){
-            System.exit(0);
-        }
+
             tileM.Tick(player);
             player.tick();
 
