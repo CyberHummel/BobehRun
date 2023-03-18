@@ -11,7 +11,7 @@ import java.io.IOException;
 
 //gesamte Classe seber
 public class LevelHandler {
-    public double Gravity = 8;
+    public double Gravity = 4;
 
     public Player player;
     public Tile_Manager tileM = new Tile_Manager(this, 16, 12, 48);
@@ -26,7 +26,7 @@ public class LevelHandler {
     //vars
 
     //runs when lvl is created
-    public LevelHandler(Window w) throws IOException {
+    public LevelHandler(Window w){
         this.w=w;
        player = new Player(w, 100, 100, 84, 84, this);
 
@@ -36,7 +36,9 @@ public class LevelHandler {
     }
 
     public void updateObstacles(int speed){
-        //TODO
+        for(int i = 0; i < tileM.tiles.length; i++){
+            tileM.tiles[i].updateTile(speed);
+        }
     }
 
 
@@ -49,9 +51,9 @@ public class LevelHandler {
 
     public void tick(){
         //Vars
-        double deathY = 800;
+        //double deathY = 800;
 
-            tileM.Tick(player);
+            player.Collision();
             player.tick();
 
         }

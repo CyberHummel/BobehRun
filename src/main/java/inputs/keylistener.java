@@ -61,6 +61,11 @@ public class keylistener implements KeyListener {
 
         }
 
+        if(key == KeyEvent.VK_SPACE){
+            w.level.player.jumping = false;
+            w.level.player.collisionOn = true;
+        }
+
 
     }
 }

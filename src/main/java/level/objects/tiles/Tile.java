@@ -1,5 +1,6 @@
 package main.java.level.objects.tiles;
 
+import main.java.level.LevelHandler;
 import main.java.level.objects.Player;
 
 import java.awt.*;
@@ -9,14 +10,17 @@ public class Tile {     //selber
     public BufferedImage image;
     public boolean collission = false;
 
+    LevelHandler lH;
+
     public int x;
     public int y;
     public int tileSize;
-
+    public  boolean onPlatform;
     public Rectangle Hitbox = new Rectangle();
 
 
-    public Tile(int x, int y, int tileSize, int HitboxSize) {
+    public Tile(int x, int y, int tileSize, int HitboxSize, LevelHandler lh) {
+        this.lH = lh;
         this.x = x;
         this.y = y;
         this.tileSize = tileSize;
@@ -43,7 +47,7 @@ public class Tile {     //selber
 
 
     public void updateTile(int speed){
-        x -= speed;
+        x += speed;
     }
 
     public void checkCollission(Player player){
@@ -52,14 +56,14 @@ public class Tile {     //selber
                 if(Hitbox.intersects(player.hitBox)){
                     System.out.println("Intersect!");
                     //TODO Gravity etc Jumping
-
-                    player.falling = false;
-                    player.y = y+player.height;
+                    onPlatform = true;
+                    player.y = y-player.height;
                     System.out.println(player.falling);
+                    player.falling = false;
                 }
-                else {
-                    player.falling = true;
-                }
+                else{
+                    System.out.println("no intersect");
+                    }
             }
         }
     }

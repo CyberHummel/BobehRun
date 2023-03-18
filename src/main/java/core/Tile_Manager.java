@@ -15,7 +15,7 @@ import java.util.Objects;
 public class Tile_Manager {
 
     LevelHandler lH;
-    Tile[] tiles;
+    public Tile[] tiles;
 
     int tileSize;
 
@@ -113,7 +113,7 @@ public class Tile_Manager {
 
             if(currentTile < maxCols * maxRows){
                 int tileCurrentNum = mapTileNum[col][row];
-                tiles[currentTile] = new Tile(x, y, tileSize, tileSize);
+                tiles[currentTile] = new Tile(x, y, tileSize, tileSize, lH);
                 tiles[currentTile].x = x;
                 tiles[currentTile].y = y;
                 if(tileCurrentNum == 0){

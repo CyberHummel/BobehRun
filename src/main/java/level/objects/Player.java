@@ -10,10 +10,11 @@ import java.util.Objects;
 
 public class Player {
     public Window w;
+    public boolean jumping;
     public int width, height;
     public double x, y;
     public double velx, vely;
-    public double JumpVelocity = 4;
+    public double JumpVelocity = -10;
     public int speed = 2;
 
     public boolean falling = true;
@@ -64,61 +65,39 @@ public class Player {
             vely = w.level.Gravity;
             y += vely;
         }
-        if(!falling){
-            vely = 0;
-            y += vely;
-        }
+
+
 
 
 
         collisionOn = true;
-
-
-        //Collision();
      }
 
-     /*public void Collision(){
-        Jumpable = false;
-        falling = true;
-        for(Obstacle i : w.main.java.level.items){
-            if(i.ID == Obstacle.Platform){
-                Platform p = (Platform)i;
-
-                    //CollisionDetec.
-                    if(new Rectangle((int)x+ (int) velx, (int) y+ (int)vely,width,height).intersects(p.x, p.y, (p.width - 20), (p.height - 20))){
-                        if  (y+height <= p.y+1){
-                                falling = false;
-                                if (vely > 0) {
-                                    vely = 0;
-                                    y = p.y - height + 1;
-                                }
-                        }
-                        else if (y < p.y){
-                                velx = 0;
-                        }
-
-                        if(vely < 0){
-                            falling = true;
-                            vely = -1*vely;
-                            y-=(vely+1);
-                        }
+     public void Collision(){
+        if(collisionOn && !jumping){
+            for(int i = 0; i < lH.tileM.tiles.length; i++){
+                if(lH.tileM.tiles[i].collission){
+                    if(hitBox.intersects(lH.tileM.tiles[i].Hitbox)){
+                        falling = false;
+                        y = (lH.tileM.tiles[i].y-height + 7);
                     }
-
-                    //Future Detec. for smoother jumping
-                    float CollisionTimeDetectionTicks = 1;
-                    if(new Rectangle((int)(x+ velx), (int)(y+vely*CollisionTimeDetectionTicks),width,height).intersects(p.x, p.y, p.width, p.height)){
-                        Jumpable = true;
-                    }
-
+                }
             }
+        }else {
+            falling = true;
         }
-     }*/
+
+        }
+
 
 
     public void Jump(){
         if(!falling){
+            jumping = true;
+            y -= 100;
             vely = JumpVelocity;
-            y -= vely;
+            vely += JumpVelocity;
+            collisionOn = false;
         }
     }
      public void Render(Graphics g) {
