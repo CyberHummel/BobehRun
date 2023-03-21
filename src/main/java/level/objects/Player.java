@@ -12,9 +12,11 @@ public class Player {
     public Window w;
     public boolean jumping;
     public int width, height;
+
+    public  boolean jumpable;
     public double x, y;
     public double velx, vely;
-    public double JumpVelocity = -10;
+    public double JumpVelocity = 5;
     public int speed = 2;
 
     public boolean falling = true;
@@ -40,6 +42,8 @@ public class Player {
         hitBox.x = (int) x;
         hitBox.y = (int) y;
 
+
+
         if ((w.FrameWidth / 2) == x && !w.Keylistener.MovingLeft) {
             x = w.FrameWidth / 2;
             if (w.Keylistener.Moving) {
@@ -57,20 +61,20 @@ public class Player {
 
         }
 
-
-
-
-        //TODO Gravity etc Jumping
-        if(falling){
-            vely = w.level.Gravity;
+        if(jumping || falling) {
             y += vely;
+            jumping = false;
+        }
+
+
+        if(vely < lH.Gravity){
+            vely += 0.2;
         }
 
 
 
 
-
-        collisionOn = true;
+        //TODO Gravity etc Jumping
      }
 
      public void Collision(){
@@ -78,28 +82,21 @@ public class Player {
             for(int i = 0; i < lH.tileM.tiles.length; i++){
                 if(lH.tileM.tiles[i].collission){
                     if(hitBox.intersects(lH.tileM.tiles[i].Hitbox)){
+                        y = lH.tileM.tiles[i].y - height;
+                        jumpable = true;
                         falling = false;
-                        y = (lH.tileM.tiles[i].y-height + 7);
                     }
                 }
             }
         }else {
-            falling = true;
+            jumpable = false;
         }
 
         }
 
 
 
-    public void Jump(){
-        if(!falling){
-            jumping = true;
-            y -= 100;
-            vely = JumpVelocity;
-            vely += JumpVelocity;
-            collisionOn = false;
-        }
-    }
+
      public void Render(Graphics g) {
          Graphics2D g2 = (Graphics2D) g;
          //g2.fillRect((int)x, (int) y, width, height);
