@@ -1,4 +1,5 @@
 package main.java.level;
+import main.java.core.Item_Manager;
 import main.java.core.Tile_Manager;
 import main.java.core.Window;
 
@@ -6,7 +7,7 @@ import main.java.core.Window;
 import main.java.level.objects.Player;
 
 import java.awt.*;
-import java.io.IOException;
+
 
 
 //gesamte Classe seber
@@ -16,6 +17,7 @@ public class LevelHandler {
     public Player player;
     public Tile_Manager tileM = new Tile_Manager(this, 16, 12, 48);
 
+    public Item_Manager itemM = new Item_Manager();
 
 
      Window w;
@@ -33,6 +35,8 @@ public class LevelHandler {
         tileM.getImages();
         tileM.readLevelData("/main/ressources/leveldata/LevelBasic.txt");
         tileM.buildLevel();
+
+        itemM.loadItems();
     }
 
     public void updateObstacles(int speed){
@@ -47,6 +51,8 @@ public class LevelHandler {
         tileM.Render(g);
 
         player.Render(g);
+
+        itemM.Render(g);
     }
 
     public void tick(){
@@ -54,6 +60,7 @@ public class LevelHandler {
         //double deathY = 800;
 
             player.Collision();
+            player.ItemCollission();
             player.tick();
 
         }

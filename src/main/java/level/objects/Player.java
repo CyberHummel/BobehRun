@@ -1,4 +1,5 @@
 package main.java.level.objects;
+
 import main.java.core.Window;
 import main.java.level.LevelHandler;
 
@@ -13,7 +14,7 @@ public class Player {
     public boolean jumping;
     public int width, height;
 
-    public  boolean jumpable;
+    public boolean jumpable;
     public double x, y;
     public double velx, vely;
     public double JumpVelocity = 5;
@@ -26,6 +27,7 @@ public class Player {
     public boolean collisionOn = true;
 
     public LevelHandler lH;
+
     public Player(Window w, int x, int y, int width, int height, LevelHandler lH) {            //x=StartX, y=StartY
         this.w = w;
         this.x = x;
@@ -41,7 +43,6 @@ public class Player {
 
         hitBox.x = (int) x;
         hitBox.y = (int) y;
-
 
 
         if ((w.FrameWidth / 2) == x && !w.Keylistener.MovingLeft) {
@@ -61,54 +62,60 @@ public class Player {
 
         }
 
-        if(jumping || falling) {
+        if (jumping || falling) {
             y += vely;
             jumping = false;
         }
 
 
-        if(vely < lH.Gravity){
+        if (vely < lH.Gravity) {
             vely += 0.2;
         }
 
-     }
+    }
 
-     public void Collision(){
-        if(collisionOn && !jumping){
-            for(int i = 0; i < lH.tileM.tiles.length; i++){
-                if(lH.tileM.tiles[i].collission){
-                    if(hitBox.intersects(lH.tileM.tiles[i].Hitbox)){
-                        y = lH.tileM.tiles[i].y - height +2;
+    public void Collision() {
+        if (collisionOn && !jumping) {
+            for (int i = 0; i < lH.tileM.tiles.length; i++) {
+                if (lH.tileM.tiles[i].collission) {
+                    if (hitBox.intersects(lH.tileM.tiles[i].hitbox)) {
+                        y = lH.tileM.tiles[i].y - height + 2;
                         hitBox.y = (int) y;
                         jumpable = true;
                         falling = false;
-                    }else{
+                    } else {
                         falling = true;
                     }
                 }
             }
-        }else {
+        } else {
             jumpable = false;
             falling = true;
         }
 
+    }
+
+    public void ItemCollission() {
+        for (int i = 0; i < lH.itemM.items.length; i++) {
+            if(hitBox.intersects(lH.itemM.items[i].hitbox)){
+                lH.itemM.items[i].pickUp(this);
+            }
         }
+    }
 
 
+    public void Render(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
 
+        Image resplayer;
+        try {
+            BufferedImage player = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player.png")));
+            resplayer = player.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        g2.drawRect(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
+        g2.drawImage(resplayer, (int) x, (int) y, null);
 
-     public void Render(Graphics g) {
-         Graphics2D g2 = (Graphics2D) g;
-
-         Image resplayer;
-         try {
-             BufferedImage player = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player.png")));
-             resplayer = player.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-         } catch (IOException e) {
-             throw new RuntimeException(e);
-         }
-         g2.drawRect(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
-         g2.drawImage(resplayer, (int) x, (int) y, null);
-
-     }
+    }
 }

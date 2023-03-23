@@ -14,7 +14,7 @@ public class Tile {     //selber
     public int x;
     public int y;
     public int tileSize;
-    public Rectangle Hitbox = new Rectangle();
+    public Rectangle hitbox = new Rectangle();
 
 
     public Tile(int x, int y, int tileSize, int HitboxSize, LevelHandler lh) {
@@ -22,30 +22,21 @@ public class Tile {     //selber
         this.x = x;
         this.y = y;
         this.tileSize = tileSize;
-        Hitbox.width = HitboxSize;
-        Hitbox.height = HitboxSize;
-        Hitbox.x = x;
-        Hitbox.y = y;
+        hitbox.width = HitboxSize;
+        hitbox.height = HitboxSize;
+        hitbox.x = x;
+        hitbox.y = y;
     }
 
     public void Render(Graphics g){
-
-        //System.out.println(tileSize);
-
         Graphics2D g2 = (Graphics2D) g;
-        //System.out.println("RENDER");
-
-        //System.out.println(image);
         g2.drawImage(image, x, y ,tileSize, tileSize,null);
-        //System.out.println("X RT:" + x);
-        //System.out.println("Y RT:" + y);
-
     }
 
 
 
     public void updateTile(int speed){
-        Hitbox.x += speed;
+        hitbox.x += speed;
         x += speed;
     }
 
