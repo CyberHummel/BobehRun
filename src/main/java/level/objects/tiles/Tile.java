@@ -5,7 +5,7 @@ import main.java.level.LevelHandler;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Tile {     //selber
+public class Tile {     //selber geschrieben
     public BufferedImage image;
     public boolean collission = false;
 

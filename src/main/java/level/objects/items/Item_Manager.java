@@ -1,11 +1,8 @@
-package main.java.core;
-
-import main.java.level.objects.items.Item;
-import main.java.level.objects.items.jumpPotion;
+package main.java.level.objects.items;
 
 import java.awt.*;
 
-public class Item_Manager {
+public class Item_Manager { // gesamte Klasse selber
     public Item[] items;
 
     public void loadItems() {

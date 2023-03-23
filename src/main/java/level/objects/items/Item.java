@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 
-public abstract class Item {
+public abstract class Item {    //alles selber gschrieben :D
     public int x, y, size;
     public boolean pickedUp = false;
 

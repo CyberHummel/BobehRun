@@ -1,13 +1,13 @@
 package main.java.level;
-import main.java.core.Item_Manager;
-import main.java.core.Tile_Manager;
+
+import main.java.level.objects.items.Item_Manager;
+import main.java.level.objects.tiles.Tile_Manager;
 import main.java.core.Window;
 
 
 import main.java.level.objects.Player;
 
 import java.awt.*;
-
 
 
 //gesamte Classe seber
@@ -19,18 +19,11 @@ public class LevelHandler {
 
     public Item_Manager itemM = new Item_Manager();
 
+    Window w;
 
-     Window w;
-
-
-
-
-    //vars
-
-    //runs when lvl is created
-    public LevelHandler(Window w){
-        this.w=w;
-       player = new Player(w, 100, 100, 84, 84, this);
+    public LevelHandler(Window w) {
+        this.w = w;
+        player = new Player(w, 100, 100, 84, 84, this);
 
         tileM.getImages();
         tileM.readLevelData("/main/ressources/leveldata/LevelBasic.txt");
@@ -39,14 +32,14 @@ public class LevelHandler {
         itemM.loadItems();
     }
 
-    public void updateObstacles(int speed){
-        for(int i = 0; i < tileM.tiles.length; i++){
+    public void updateObstacles(int speed) {
+        for (int i = 0; i < tileM.tiles.length; i++) {
             tileM.tiles[i].updateTile(speed);
         }
     }
 
 
-    public void Render(Graphics g){
+    public void Render(Graphics g) {
 
         tileM.Render(g);
 
@@ -55,15 +48,13 @@ public class LevelHandler {
         itemM.Render(g);
     }
 
-    public void tick(){
-        //Vars
-        //double deathY = 800;
+    public void tick() {
 
-            player.Collision();
-            player.ItemCollission();
-            player.tick();
-
-        }
+        player.Collision();
+        player.ItemCollission();
+        player.tick();
 
     }
+
+}
 

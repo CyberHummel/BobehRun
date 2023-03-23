@@ -4,7 +4,7 @@ import main.java.core.Window;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class keylistener implements KeyListener {
+public class keylistener implements KeyListener {       //gesamte Klasse selber
     private final Window w;
     public boolean Moving = false;
 

@@ -1,7 +1,6 @@
-package main.java.core;
+package main.java.level.objects.tiles;
 
 import main.java.level.LevelHandler;
-import main.java.level.objects.tiles.Tile;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -11,7 +10,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 
-public class Tile_Manager {
+public class Tile_Manager { //alles selber bis auf readlevelData()
 
     LevelHandler lH;
     public Tile[] tiles;
@@ -92,13 +91,7 @@ public class Tile_Manager {
         }
     }
 
-
-
-
-
-
     public void buildLevel() {
-        //System.out.println(Arrays.deepToString(mapTileNum));
 
         int col = 0;
         int row = 0;
@@ -106,9 +99,7 @@ public class Tile_Manager {
         int y = 0;
         int currentTile = 0;
 
-
         while (col < maxCols && row < maxRows){
-
 
             if(currentTile < maxCols * maxRows){
                 int tileCurrentNum = mapTileNum[col][row];
@@ -120,16 +111,12 @@ public class Tile_Manager {
                     tiles[currentTile].collission = false;
 
                 } else if (tileCurrentNum == 1) {
-                    //System.out.println("1");
                     tiles[currentTile].image = tileGrassImage;
                     tiles[currentTile].collission = true;
                 } else if (tileCurrentNum == 2) {
-                    //.out.println("2");
                     tiles[currentTile].image = tileDirtImage;
                     tiles[currentTile].collission = true;
                 }
-
-
 
                 currentTile ++;
 
@@ -138,21 +125,13 @@ public class Tile_Manager {
                 x += tileSize;
 
                 if(col == maxCols){
-                    //System.out.println(row);
                     col = 0;
                     x = 0;
                     row ++;
                     y += tileSize;
                 }
             }
-
-
-
-
-
-
         }
-
     }
 
     public void Render(Graphics g){

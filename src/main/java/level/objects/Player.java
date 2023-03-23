@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Player {
+public class Player {       //Gestamte Klasse selber geschrieben
     public Window w;
     public boolean jumping;
     public int width, height;
@@ -28,7 +28,7 @@ public class Player {
 
     public LevelHandler lH;
 
-    public Player(Window w, int x, int y, int width, int height, LevelHandler lH) {            //x=StartX, y=StartY
+    public Player(Window w, int x, int y, int width, int height, LevelHandler lH) {
         this.w = w;
         this.x = x;
         this.y = y;
@@ -97,7 +97,7 @@ public class Player {
 
     public void ItemCollission() {
         for (int i = 0; i < lH.itemM.items.length; i++) {
-            if(hitBox.intersects(lH.itemM.items[i].hitbox)){
+            if (hitBox.intersects(lH.itemM.items[i].hitbox)) {
                 lH.itemM.items[i].pickUp(this);
             }
         }
