@@ -71,10 +71,6 @@ public class Player {
             vely += 0.2;
         }
 
-
-
-
-        //TODO Gravity etc Jumping
      }
 
      public void Collision(){
@@ -82,14 +78,18 @@ public class Player {
             for(int i = 0; i < lH.tileM.tiles.length; i++){
                 if(lH.tileM.tiles[i].collission){
                     if(hitBox.intersects(lH.tileM.tiles[i].Hitbox)){
-                        y = lH.tileM.tiles[i].y - height;
+                        y = lH.tileM.tiles[i].y - height +2;
+                        hitBox.y = (int) y;
                         jumpable = true;
                         falling = false;
+                    }else{
+                        falling = true;
                     }
                 }
             }
         }else {
             jumpable = false;
+            falling = true;
         }
 
         }
@@ -99,7 +99,6 @@ public class Player {
 
      public void Render(Graphics g) {
          Graphics2D g2 = (Graphics2D) g;
-         //g2.fillRect((int)x, (int) y, width, height);
 
          Image resplayer;
          try {

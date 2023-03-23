@@ -1,7 +1,6 @@
 package main.java.core;
 
 import main.java.level.LevelHandler;
-import main.java.level.objects.Player;
 import main.java.level.objects.tiles.Tile;
 
 import javax.imageio.ImageIO;
@@ -162,10 +161,5 @@ public class Tile_Manager {
         }
     }
 
-    public void Tick(Player p){
-        p.collisionOn = true;
-        for(int i = 0; i < tiles.length; i++){
-            tiles[i].checkCollission(p);
-        }
-    }
+
 }
