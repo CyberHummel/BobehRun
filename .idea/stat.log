@@ -2245,3 +2245,5 @@
 {"ts":1679761566258,"action":"IDE_ACTIVATED"}
 {"ts":1679761595142,"action":"FILE_CLOSED","file":"/src/main/java/core/Run.java","tags":{"FILE_LINE_OF_CODE":"13"}}
 {"ts":1679761595142,"action":"FILE_OPENED","file":"/src/main/java/core/hud/HUD.java","tags":{"FILE_LINE_OF_CODE":"39"}}
+{"ts":1679761606260,"action":"FILE_CLOSED","file":"/src/main/java/core/hud/HUD.java","tags":{"FILE_LINE_OF_CODE":"36"}}
+{"ts":1679761606260,"action":"FILE_OPENED","file":"/src/main/java/core/Window.java","tags":{"FILE_LINE_OF_CODE":"128"}}
