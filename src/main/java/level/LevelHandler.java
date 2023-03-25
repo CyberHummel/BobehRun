@@ -16,7 +16,7 @@ public class LevelHandler {
     public double Gravity = 4;
 
     public Player player;
-    public Tile_Manager tileM = new Tile_Manager(this, 16, 12, 48);
+    public Tile_Manager tileM = new Tile_Manager(this, 32, 12, 48);
 
     public Item_Manager itemM = new Item_Manager();
 

@@ -20,7 +20,7 @@ public class BackroundHandler {
     public void updateClouds(double speed){
         for(int i = 0; i < clouds.length; i++){
             if(clouds[i].x <= -clouds[i].Size[0]){
-                clouds[i].x = clouds[i].startX + 600;
+                clouds[i].x = clouds[i].startX + 700;
             }else {
                 clouds[i]. x += speed;
             }
