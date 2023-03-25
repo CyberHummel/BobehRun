@@ -28,14 +28,13 @@ public class Tile {     //selber geschrieben
         hitbox.y = y;
     }
 
-    public void Render(Graphics g){
+    public void Render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(image, x, y ,tileSize, tileSize,null);
+        g2.drawImage(image, x, y, tileSize, tileSize, null);
     }
 
 
-
-    public void updateTile(int speed){
+    public void updateTile(int speed) {
         hitbox.x += speed;
         x += speed;
     }

@@ -1,6 +1,7 @@
 package main.java.inputs;
 
 import main.java.core.Window;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -9,8 +10,8 @@ public class keylistener implements KeyListener {       //gesamte Klasse selber
     public boolean Moving = false;
 
 
-    public keylistener(Window w ){
-        this.w=w;
+    public keylistener(Window w) {
+        this.w = w;
         w.addKeyListener(this);
     }
 
@@ -19,25 +20,21 @@ public class keylistener implements KeyListener {       //gesamte Klasse selber
     }
 
 
-
     public boolean MovingLeft = false;
+
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
 
-        if(key == KeyEvent.VK_D){
+        if (key == KeyEvent.VK_D) {
             Moving = true;
             w.level.player.velx = w.level.player.speed;
             MovingLeft = false;
-        }
-
-        else if(key == KeyEvent.VK_A){
+        } else if (key == KeyEvent.VK_A) {
             Moving = true;
             MovingLeft = true;
             w.level.player.velx = -w.level.player.speed;
-        }
-
-        else if(key == KeyEvent.VK_SPACE){
-            if(w.level.player.jumpable) {
+        } else if (key == KeyEvent.VK_SPACE) {
+            if (w.level.player.jumpable) {
                 w.level.player.y -= 4;
                 w.level.player.hitBox.y -= 4;
                 w.level.player.y -= 4;
@@ -52,19 +49,19 @@ public class keylistener implements KeyListener {       //gesamte Klasse selber
 
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
-        if(key == KeyEvent.VK_D && !MovingLeft){
+        if (key == KeyEvent.VK_D && !MovingLeft) {
             Moving = false;
             w.level.player.velx = 0;
 
         }
 
-        if(key == KeyEvent.VK_A && MovingLeft){
+        if (key == KeyEvent.VK_A && MovingLeft) {
             Moving = false;
             w.level.player.velx = 0;
 
         }
 
-        if(key == KeyEvent.VK_SPACE){
+        if (key == KeyEvent.VK_SPACE) {
             w.level.player.jumping = false;
             w.level.player.falling = true;
         }

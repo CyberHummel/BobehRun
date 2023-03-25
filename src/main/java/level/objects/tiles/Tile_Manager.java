@@ -35,11 +35,10 @@ public class Tile_Manager { //alles selber bis auf readlevelData()
         this.tileSize = tileSize;
         this.maxCols = maxCols;
         this.maxRows = maxRows;
-        
+
         tiles = new Tile[maxCols * maxRows];
 
         mapTileNum = new int[maxCols][maxRows];
-
 
 
     }
@@ -55,11 +54,11 @@ public class Tile_Manager { //alles selber bis auf readlevelData()
 
             tileGrassLeftImage = ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Grass_Left.png"))));
 
-            tileGrassRightImage= ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Grass_Right.png"))));
+            tileGrassRightImage = ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Grass_Right.png"))));
 
-            tileGrassTopLeftImage= ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Grass_TopLeft.png"))));
+            tileGrassTopLeftImage = ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Grass_TopLeft.png"))));
 
-            tileGrassTopRightImage= ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Grass_TopRight.png"))));
+            tileGrassTopRightImage = ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Grass_TopRight.png"))));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -67,36 +66,36 @@ public class Tile_Manager { //alles selber bis auf readlevelData()
 
     public void readLevelData(String path) {
         System.out.println("Reading Level Data from:" + path);
-        try{
+        try {
             File file = new File(Objects.requireNonNull(getClass().getResource(path)).getPath());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             int col = 0;
             int row = 0;
 
-            while (col < maxCols && row < maxRows){
+            while (col < maxCols && row < maxRows) {
                 String line = br.readLine();
 
-                while (col < maxCols){
+                while (col < maxCols) {
                     String[] numbers = line.split(" ");
 
                     int num = Integer.parseInt(numbers[col]);
-                    mapTileNum [col][row] = num;
+                    mapTileNum[col][row] = num;
 
-                    col ++;
+                    col++;
 
                 }
-                if(col == maxCols){
+                if (col == maxCols) {
 
                     col = 0;
-                    row ++;
+                    row++;
                 }
             }
             System.out.println("Loading Finished!");
             br.close();
             System.out.println(Arrays.deepToString(mapTileNum));
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("ERROR could not read file");
 
         }
@@ -110,14 +109,14 @@ public class Tile_Manager { //alles selber bis auf readlevelData()
         int y = 0;
         int currentTile = 0;
 
-        while (col < maxCols && row < maxRows){
+        while (col < maxCols && row < maxRows) {
 
-            if(currentTile < maxCols * maxRows){
+            if (currentTile < maxCols * maxRows) {
                 int tileCurrentNum = mapTileNum[col][row];
                 tiles[currentTile] = new Tile(x, y, tileSize, tileSize, lH);
                 tiles[currentTile].x = x;
                 tiles[currentTile].y = y;
-                if(tileCurrentNum == 0){
+                if (tileCurrentNum == 0) {
                     tiles[currentTile].image = tileAirImage;
                     tiles[currentTile].collission = false;
 
@@ -141,24 +140,24 @@ public class Tile_Manager { //alles selber bis auf readlevelData()
                     tiles[currentTile].collission = true;
                 }
 
-                currentTile ++;
+                currentTile++;
 
                 col++;
 
                 x += tileSize;
 
-                if(col == maxCols){
+                if (col == maxCols) {
                     col = 0;
                     x = 0;
-                    row ++;
+                    row++;
                     y += tileSize;
                 }
             }
         }
     }
 
-    public void Render(Graphics g){
-        for(int i = 0; i < tiles.length; i++){
+    public void Render(Graphics g) {
+        for (int i = 0; i < tiles.length; i++) {
             tiles[i].Render(g);
         }
     }

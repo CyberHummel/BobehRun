@@ -19,7 +19,6 @@ public class Window extends Canvas implements Runnable {
     private static final long serialVersionUID = 1L;
 
 
-
     private Thread thread;
     private boolean running = false;
     public final keylistener Keylistener = new keylistener(this);
