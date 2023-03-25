@@ -13,7 +13,7 @@ public class cloud {
     public BufferedImage texture;
 
     String cloudSmallPath = "/main/ressources/textures/Cloud_Small.png";
-    String cloudBigPath = "";
+    String cloudBigPath = "/main/ressources/textures/Cloud_Big.png";
 
     int[] Size = new int[2];
 
@@ -22,6 +22,7 @@ public class cloud {
     public cloud(int x, int y, int size, int startX) {
         this.x = x;
         this.y = y;
+        this.startX = startX;
         this.size = size;
         if (size == 0) {
             Path = cloudSmallPath;
@@ -29,8 +30,8 @@ public class cloud {
             Size[1] =  96;
         } else if (size == 1) {
             Path = cloudBigPath;
-            Size[0] = 122;
-            Size[1] = 121;
+            Size[0] = 348;
+            Size[1] = 192;
         }
         try {
             texture = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(Path)));

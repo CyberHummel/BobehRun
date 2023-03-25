@@ -34,7 +34,7 @@ public class LevelHandler {
 
         itemM.loadItems();
 
-        bM.BuildClouds(1);
+        bM.BuildClouds(2);
     }
 
     public void updateObstacles(int speed, double cloudSpeed) {

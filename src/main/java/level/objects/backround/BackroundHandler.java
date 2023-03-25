@@ -14,12 +14,13 @@ public class BackroundHandler {
     public void BuildClouds(int amount){
         clouds = new cloud[amount];
         clouds[0] = new cloud(100, 200, 0, 100);
+        clouds[1] = new cloud(400, 200, 1, 400);
     }
 
     public void updateClouds(double speed){
         for(int i = 0; i < clouds.length; i++){
             if(clouds[i].x <= -clouds[i].Size[0]){
-                clouds[i].x = clouds[i].startX;
+                clouds[i].x = clouds[i].startX + 600;
             }else {
                 clouds[i]. x += speed;
             }
