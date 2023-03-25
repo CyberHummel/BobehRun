@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class cloud {
+public class cloud {//alles selber gschrieben
     public double x, y;
     public int size;
     public  int startX;

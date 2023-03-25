@@ -20,10 +20,13 @@ public class Tile_Manager { //alles selber bis auf readlevelData()
     int maxCols;
     int maxRows;
     public BufferedImage tileAirImage;
-
     public BufferedImage tileGrassImage;
-
     public BufferedImage tileDirtImage;
+    public BufferedImage tileGrassLeftImage;
+    public BufferedImage tileGrassRightImage;
+    public BufferedImage tileGrassTopLeftImage;
+    public BufferedImage tileGrassTopRightImage;
+
 
     int[][] mapTileNum;
 
@@ -49,6 +52,14 @@ public class Tile_Manager { //alles selber bis auf readlevelData()
 
             tileDirtImage = ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Dirt.png"))));
 
+
+            tileGrassLeftImage = ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Grass_Left.png"))));
+
+            tileGrassRightImage= ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Grass_Right.png"))));
+
+            tileGrassTopLeftImage= ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Grass_TopLeft.png"))));
+
+            tileGrassTopRightImage= ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Grass_TopRight.png"))));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -115,6 +126,18 @@ public class Tile_Manager { //alles selber bis auf readlevelData()
                     tiles[currentTile].collission = true;
                 } else if (tileCurrentNum == 2) {
                     tiles[currentTile].image = tileDirtImage;
+                    tiles[currentTile].collission = true;
+                } else if (tileCurrentNum == 3) {
+                    tiles[currentTile].image = tileGrassLeftImage;
+                    tiles[currentTile].collission = true;
+                } else if (tileCurrentNum == 4) {
+                    tiles[currentTile].image = tileGrassRightImage;
+                    tiles[currentTile].collission = true;
+                } else if (tileCurrentNum == 5) {
+                    tiles[currentTile].image = tileGrassTopLeftImage;
+                    tiles[currentTile].collission = true;
+                } else if (tileCurrentNum == 6) {
+                    tiles[currentTile].image = tileGrassTopRightImage;
                     tiles[currentTile].collission = true;
                 }
 

@@ -4,7 +4,7 @@ import main.java.level.LevelHandler;
 
 import java.awt.*;
 
-public class BackroundHandler {
+public class BackroundHandler {//alles selber geschrieben
     public LevelHandler lH;
     public cloud[] clouds;
     public BackroundHandler(LevelHandler lH){
