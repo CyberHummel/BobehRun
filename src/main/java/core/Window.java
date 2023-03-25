@@ -72,7 +72,7 @@ public class Window extends Canvas implements Runnable {
         Graphics g = bs.getDrawGraphics();
 
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.WHITE);
+        g2.setColor(Color.BLACK);
         g2.fillRect(0, 0, this.getWidth(), this.getHeight());
 
 
