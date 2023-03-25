@@ -28,7 +28,7 @@ public class keylistener implements KeyListener {       //gesamte Klasse selber
             Moving = true;
             w.level.player.velx = w.level.player.speed;
             MovingLeft = false;
-
+            System.out.println(w.level.player.x);
 
         }
 
@@ -36,7 +36,7 @@ public class keylistener implements KeyListener {       //gesamte Klasse selber
             Moving = true;
             MovingLeft = true;
             w.level.player.velx = -w.level.player.speed;
-
+            System.out.println(w.level.player.x);
 
         }
 

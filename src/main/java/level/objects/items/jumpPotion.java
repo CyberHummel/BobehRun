@@ -16,7 +16,6 @@ public class jumpPotion extends Item {
         if (!pickedUp) {
             Graphics2D g2 = (Graphics2D) g;
             g2.drawImage(image, x, y, size, size, null);
-            g2.draw(hitbox);
         }
     }
 

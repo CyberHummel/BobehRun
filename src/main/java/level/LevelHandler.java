@@ -1,5 +1,6 @@
 package main.java.level;
 
+import main.java.level.objects.backround.BackroundHandler;
 import main.java.level.objects.items.Item_Manager;
 import main.java.level.objects.tiles.Tile_Manager;
 import main.java.core.Window;
@@ -19,6 +20,8 @@ public class LevelHandler {
 
     public Item_Manager itemM = new Item_Manager();
 
+    public BackroundHandler bM = new BackroundHandler(this);
+
     Window w;
 
     public LevelHandler(Window w) {
@@ -30,12 +33,15 @@ public class LevelHandler {
         tileM.buildLevel();
 
         itemM.loadItems();
+
+        bM.BuildClouds(1);
     }
 
-    public void updateObstacles(int speed) {
+    public void updateObstacles(int speed, double cloudSpeed) {
         for (int i = 0; i < tileM.tiles.length; i++) {
             tileM.tiles[i].updateTile(speed);
         }
+        bM.updateClouds(cloudSpeed);
     }
 
 
@@ -46,6 +52,8 @@ public class LevelHandler {
         player.Render(g);
 
         itemM.Render(g);
+
+        bM.Render(g);
     }
 
     public void tick() {
