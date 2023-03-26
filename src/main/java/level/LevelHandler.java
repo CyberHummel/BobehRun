@@ -3,6 +3,7 @@ package main.java.level;
 import main.java.core.hud.HUD;
 import main.java.level.objects.backround.BackroundHandler;
 import main.java.level.objects.items.Item_Manager;
+import main.java.level.objects.npc.NpcHandler;
 import main.java.level.objects.tiles.Tile_Manager;
 import main.java.core.Window;
 
@@ -25,6 +26,8 @@ public class LevelHandler {
 
     public HUD hud = new HUD(this);
 
+    public NpcHandler npcH = new NpcHandler(1,this);
+
     Window w;
 
     public LevelHandler(Window w) {
@@ -36,6 +39,7 @@ public class LevelHandler {
         tileM.buildLevel();
 
         itemM.loadItems(this);
+        npcH.SpawnNpcs();
 
         bM.BuildClouds(2);
     }
@@ -53,6 +57,7 @@ public class LevelHandler {
         tileM.Render(g);
 
         player.Render(g);
+        npcH.Render(g);
 
         itemM.Render(g);
 
@@ -63,10 +68,12 @@ public class LevelHandler {
 
     public void tick() {
 
+
         player.Collision();
         player.ItemCollission();
         player.tick();
-
+        npcH.Colission();
+        npcH.Tick();
     }
 
 }
