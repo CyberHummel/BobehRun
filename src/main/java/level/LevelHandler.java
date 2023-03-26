@@ -41,27 +41,28 @@ public class LevelHandler {
         itemM.loadItems(this);
         npcH.SpawnNpcs();
 
-        bM.BuildClouds(2);
+        bM.Build(2, 1);
     }
 
-    public void updateObstacles(int speed, double cloudSpeed) {
+    public void updateObstacles(int speed, double cloudSpeed, double abstractBackroundSpeed) {
         for (int i = 0; i < tileM.tiles.length; i++) {
             tileM.tiles[i].updateTile(speed);
         }
         bM.updateClouds(cloudSpeed);
+        bM.updateAbstractBackrounds(abstractBackroundSpeed);
     }
 
 
     public void Render(Graphics g) {
 
         tileM.Render(g);
-
+        bM.Render(g);
         player.Render(g);
         npcH.Render(g);
 
         itemM.Render(g);
 
-        bM.Render(g);
+
 
         hud.Render(g);
     }

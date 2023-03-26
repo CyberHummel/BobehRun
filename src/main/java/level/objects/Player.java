@@ -48,13 +48,13 @@ public class Player {       //Gestamte Klasse selber geschrieben
         if ((w.FrameWidth / 2) == x && !w.Keylistener.MovingLeft) {
             x = w.FrameWidth / 2;
             if (w.Keylistener.Moving) {
-                w.level.updateObstacles(-2, -0.5);
+                w.level.updateObstacles(-2, -0.5, -0.25);
             } else {
-                w.level.updateObstacles(0, 0);
+                w.level.updateObstacles(0, 0, 0);
             }
         } else {
             x += velx;
-            w.level.updateObstacles(0, 0);
+            w.level.updateObstacles(0, 0, 0);
         }
 
         if (x <= 0 && w.Keylistener.MovingLeft) {
