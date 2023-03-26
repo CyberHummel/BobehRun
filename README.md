@@ -1,8 +1,8 @@
 # BobehRun
 NOTE: This Project is not finished, so therefore there are many bugs ;)
 
-#Release:
+# Release:
 The current release date is unknown.
 
-#Contriutors:
+# Contriutors:
 CyberHummel
