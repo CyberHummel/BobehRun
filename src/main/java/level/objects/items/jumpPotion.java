@@ -10,7 +10,6 @@ public class jumpPotion extends Item {
         super(x, y, size, pickedUp, texturePath);
     }
 
-
     @Override
     public void Render(Graphics g) {
         if (!pickedUp) {

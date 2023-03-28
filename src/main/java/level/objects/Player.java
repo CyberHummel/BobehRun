@@ -13,7 +13,7 @@ public class Player {       //Gestamte Klasse selber geschrieben
     public Window w;
     public boolean jumping;
     public int width, height;
-
+    public int health = 100;
     public boolean jumpable;
     public double x, y;
     public double velx, vely;
@@ -40,7 +40,10 @@ public class Player {       //Gestamte Klasse selber geschrieben
     }
 
     public void tick() {
-
+        if(health == 0){
+            System.out.println("You DIED!");
+            System.exit(0);
+        }
         hitBox.x = (int) x;
         hitBox.y = (int) y;
 
@@ -48,7 +51,7 @@ public class Player {       //Gestamte Klasse selber geschrieben
         if ((w.FrameWidth / 2) == x && !w.Keylistener.MovingLeft) {
             x = w.FrameWidth / 2;
             if (w.Keylistener.Moving) {
-                w.level.updateObstacles(-2, -0.5, -0.25);
+                w.level.updateObstacles(-2, -0.5, -0.3);
             } else {
                 w.level.updateObstacles(0, 0, 0);
             }

@@ -17,7 +17,7 @@ public class BackroundHandler {//alles selber geschrieben
         clouds[0] = new cloud(100, 200, 0, 100);
         clouds[1] = new cloud(400, 200, 1, 400);
         abstractBackrounds = new AbstractBackround[amountAbstractBackrounds];
-        abstractBackrounds[0] = new AbstractBackround(0, 100, 385, 301, 0);
+        abstractBackrounds[0] = new AbstractBackround(0, 200, 385, 301, 0);
     }
 
     public void updateClouds(double speed){

@@ -2,23 +2,29 @@ package main.java.core.hud;
 
 import main.java.level.LevelHandler;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
 public class HUD {
-    LevelHandler lH;
     public int Coins;
+    LevelHandler lH;
     Font font;
 
+    BufferedImage heart, deadHeart, heartOverlay;
     Color transparent = new Color(160, 160, 160, 191);
-    Rectangle hud = new Rectangle(0, 25, 100, 50);
+    Rectangle hud = new Rectangle(0, 25, 100, 60);
 
     public HUD(LevelHandler lH) {
         this.lH = lH;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/fonts/RobotoMono-Bold.ttf")));
             font = font.deriveFont(Font.PLAIN, 20);
+            heart = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/HeartIconFull.png")));
+            deadHeart = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/HeartIconEmpty.png")));
+            heartOverlay = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Overlay Hearts.png")));
         } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);
         }
@@ -30,6 +36,143 @@ public class HUD {
         g2.setColor(transparent);
         g2.fill(hud);
         g2.setColor(Color.BLACK);
-        g2.drawString("COINS:" + Coins, 0, 50);
+        g2.drawString("COINS:" + Coins, 0, 60);
+        HealthBarRender(g2);
+    }
+
+    public void HealthBarRender(Graphics2D g2) {
+        int amountHearts = lH.player.health / 10;
+        switch (amountHearts) {
+            case 1:
+                g2.drawImage(heartOverlay, 0, 0, 259, 41, null);
+                g2.drawImage(heart, 0, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 2, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 3, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 4, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 5, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 6, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 7, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 8, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 9, 10, 24, 24, null);
+                break;
+            case 2:
+                g2.drawImage(heartOverlay, 0, 0, 259, 41, null);
+                g2.drawImage(heart, 0, 10, 24, 24, null);
+                g2.drawImage(heart, 24, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 2, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 3, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 4, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 5, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 6, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 7, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 8, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 9, 10, 24, 24, null);
+                break;
+            case 3:
+                g2.drawImage(heartOverlay, 0, 0, 259, 41, null);
+                g2.drawImage(heart, 0, 10, 24, 24, null);
+                g2.drawImage(heart, 24, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 2, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 3, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 4, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 5, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 6, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 7, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 8, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 9, 10, 24, 24, null);
+                break;
+            case 4:
+                g2.drawImage(heartOverlay, 0, 0, 259, 41, null);
+                g2.drawImage(heart, 0, 10, 24, 24, null);
+                g2.drawImage(heart, 24, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 2, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 3, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 4, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 5, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 6, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 7, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 8, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 9, 10, 24, 24, null);
+                break;
+            case 5:
+                g2.drawImage(heartOverlay, 0, 0, 259, 41, null);
+                g2.drawImage(heart, 0, 10, 24, 24, null);
+                g2.drawImage(heart, 24, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 2, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 3, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 4, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 5, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 6, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 7, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 8, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 9, 10, 24, 24, null);
+                break;
+            case 6:
+                g2.drawImage(heartOverlay, 0, 0, 259, 41, null);
+                g2.drawImage(heart, 0, 10, 24, 24, null);
+                g2.drawImage(heart, 24, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 2, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 3, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 4, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 5, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 6, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 7, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 8, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 9, 10, 24, 24, null);
+                break;
+            case 7:
+                g2.drawImage(heartOverlay, 0, 0, 259, 41, null);
+                g2.drawImage(heart, 0, 10, 24, 24, null);
+                g2.drawImage(heart, 24, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 2, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 3, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 4, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 5, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 6, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 7, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 8, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 9, 10, 24, 24, null);
+                break;
+            case 8:
+                g2.drawImage(heartOverlay, 0, 0, 259, 41, null);
+                g2.drawImage(heart, 0, 10, 24, 24, null);
+                g2.drawImage(heart, 24, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 2, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 3, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 4, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 5, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 6, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 7, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 8, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 9, 10, 24, 24, null);
+                break;
+            case 9:
+                g2.drawImage(heartOverlay, 0, 0, 259, 41, null);
+                g2.drawImage(heart, 0, 10, 24, 24, null);
+                g2.drawImage(heart, 24, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 2, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 3, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 4, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 5, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 6, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 7, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 8, 10, 24, 24, null);
+                g2.drawImage(deadHeart, 24 * 9, 10, 24, 24, null);
+                break;
+            case 10:
+                g2.drawImage(heartOverlay, 0, 0, 259, 41, null);
+                g2.drawImage(heart, 0, 10, 24, 24, null);
+                g2.drawImage(heart, 24, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 2, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 3, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 4, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 5, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 6, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 7, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 8, 10, 24, 24, null);
+                g2.drawImage(heart, 24 * 9, 10, 24, 24, null);
+                break;
+        }
     }
 }

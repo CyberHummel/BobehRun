@@ -156,9 +156,19 @@ public class Tile_Manager { //alles selber bis auf readlevelData()
         }
     }
 
-    public void Render(Graphics g) {
+    public void RenderNonAir(Graphics g) {
         for (int i = 0; i < tiles.length; i++) {
-            tiles[i].Render(g);
+            if(tiles[i].collission){
+                tiles[i].Render(g);
+            }
+        }
+    }
+
+    public void RenderAir(Graphics g){
+        for (int i = 0; i < tiles.length; i++) {
+            if(!tiles[i].collission){
+                tiles[i].Render(g);
+            }
         }
     }
 

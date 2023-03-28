@@ -14,7 +14,11 @@ import java.awt.*;
 
 
 //gesamte Classe seber
-public class LevelHandler {
+public class LevelHandler extends Thread{
+
+    public void Run(Graphics g){
+        Render(g);
+    }
     public double Gravity = 4;
 
     public Player player;
@@ -54,9 +58,9 @@ public class LevelHandler {
 
 
     public void Render(Graphics g) {
-
-        tileM.Render(g);
+        tileM.RenderAir(g);
         bM.Render(g);
+        tileM.RenderNonAir(g);
         player.Render(g);
         npcH.Render(g);
 

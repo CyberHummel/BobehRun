@@ -14,7 +14,7 @@ public class NpcHandler {
     }
 
     public void SpawnNpcs(){
-        enemies[0] = new Enemy(100,400, 96, 48, "/main/ressources/textures/Wildschwein.png", lH);
+        enemies[0] = new Enemy(400,400, 96, 48, "/main/ressources/textures/Wildschwein.png", lH);
     }
 
     public void Render(Graphics g){
@@ -26,6 +26,7 @@ public class NpcHandler {
     public void Tick(){
         for(int i = 0; i < enemies.length; i ++){
             enemies[i].tick();
+            enemies[i].MoveToPlayer(200,lH.player);
         }
     }
 

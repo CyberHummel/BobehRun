@@ -17,14 +17,11 @@ public class Window extends Canvas implements Runnable {
 
     @Serial
     private static final long serialVersionUID = 1L;
-
-
     private Thread thread;
     private boolean running = false;
     public final keylistener Keylistener = new keylistener(this);
 
     public LevelHandler level = new LevelHandler(this);
-
     public int FrameWidth, FrameHeight;
     public int FPS;
 
@@ -43,6 +40,9 @@ public class Window extends Canvas implements Runnable {
         frame.setIconImage(icon);
         frame.add(this);
         frame.setBackground(Color.white);
+        frame.setLocation(1,1);
+        frame.setSize(Width +1, Heigth);
+        level.start();
     }
 
 
@@ -75,7 +75,7 @@ public class Window extends Canvas implements Runnable {
         g2.fillRect(0, 0, this.getWidth(), this.getHeight());
 
 
-        level.Render(g);
+        level.Run(g);
 
         bs.show();
         g2.dispose();

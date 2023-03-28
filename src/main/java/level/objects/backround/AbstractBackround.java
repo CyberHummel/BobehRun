@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class AbstractBackround {
-    int x, y, sizeX, sizeY, startX;
+    int sizeX, sizeY, startX;
+    double x, y;
     BufferedImage texture;
     String bigTexturePath = "/main/ressources/textures/Abstract Backround 1.png";
     public AbstractBackround(int x, int y, int sizeX, int sizeY, int size){
@@ -31,6 +32,6 @@ public class AbstractBackround {
 
     public void Render(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(texture, x, y, sizeX, sizeY, null);
+        g2.drawImage(texture, (int)x, (int)y, sizeX, sizeY, null);
     }
 }
