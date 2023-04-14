@@ -1,29 +1,35 @@
 package main.java.level.objects.npc;
-
 import main.java.level.LevelHandler;
 import main.java.level.objects.Player;
 import main.java.level.objects.tiles.Tile_Manager;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
+
 
 public class Enemy extends Thread{
+
+
     private int x, y, sizeX, sizeY;
+
     private double vely, velx;
     private int damage = 10;
+
+    private int attackDelay = 1000;
     BufferedImage texture;
     public boolean dead = false;
     private boolean falling;
     public int health = 100;
     private Tile_Manager tM;
-    private LevelHandler lH;
+     LevelHandler lH;
     public Rectangle hitbox;
-    public Enemy(int x, int y, int sizeX, int sizeY, String texturePath, LevelHandler lH) {
+    int maxDistance;
+
+
+
+    public Enemy(int x, int y, int sizeX, int sizeY, String texturePath, LevelHandler lH, int maxDistance) {
         this.x = x;
         this.y = y;
         this.sizeX = sizeX;
@@ -31,6 +37,8 @@ public class Enemy extends Thread{
         hitbox = new Rectangle(x, y, sizeX, sizeY);
         this.lH = lH;
         this.tM = lH.tileM;
+        this.maxDistance = maxDistance;
+
 
         try {
             texture = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath)));
@@ -40,14 +48,12 @@ public class Enemy extends Thread{
     }
 
     public void Attack(Player p){
-        //TODO ERROR: Delay not working
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                p.health -= damage;
-            }
-        }, 10000);
+        if(p.hitBox.intersects(hitbox)){
+        if(p.health != 0){
+            p.health -= damage;
+        }
+        }
+
     }
 
     public void tick() {
@@ -75,6 +81,8 @@ public class Enemy extends Thread{
             }
         }
     }
+
+
     public void Render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         if (!dead) {
@@ -102,12 +110,6 @@ public class Enemy extends Thread{
                         Distance = CalculateDistance(p);
                         x += velx;
 
-                    } else if (hitbox.intersects(p.hitBox)) {
-                        while (hitbox.intersects(p.hitBox)){
-                            Attack(p);
-                        }
-                        velx = 0;
-
                     }
                 }
             }else{
@@ -127,6 +129,17 @@ public class Enemy extends Thread{
                         Distance = CalculateDistance(p);
                     }
                 }
+            }
+        }
+    }
+
+    public void run(){
+        while (health != 0 && lH.player.health != 0){
+            Attack(lH.player);
+            try {
+                Thread.sleep(attackDelay);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
     }

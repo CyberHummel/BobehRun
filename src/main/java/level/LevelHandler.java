@@ -28,15 +28,18 @@ public class LevelHandler extends Thread{
 
     public BackroundHandler bM = new BackroundHandler(this);
 
-    public HUD hud = new HUD(this);
+    public HUD hud;
 
-    public NpcHandler npcH = new NpcHandler(1,this);
+    public NpcHandler npcH;
 
     Window w;
 
     public LevelHandler(Window w) {
         this.w = w;
         player = new Player(w, 100, 100, 84, 84, this);
+        npcH = new NpcHandler(1,this, player);
+        hud =  new HUD(this, w);
+        System.out.println(player);
 
         tileM.getImages();
         tileM.readLevelData("/main/ressources/leveldata/LevelBasic.txt");
@@ -46,6 +49,8 @@ public class LevelHandler extends Thread{
         npcH.SpawnNpcs();
 
         bM.Build(2, 1);
+        npcH.tickOn();
+
     }
 
     public void updateObstacles(int speed, double cloudSpeed, double abstractBackroundSpeed) {
@@ -69,6 +74,11 @@ public class LevelHandler extends Thread{
 
 
         hud.Render(g);
+        if(player.health <= 0){
+            hud.DeathScreen(g);
+            System.out.println("You DIED!");
+
+        }
     }
 
     public void tick() {
@@ -78,7 +88,9 @@ public class LevelHandler extends Thread{
         player.ItemCollission();
         player.tick();
         npcH.Colission();
-        npcH.Tick();
+        npcH.tick();
+
+
     }
 
 }

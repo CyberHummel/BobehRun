@@ -40,10 +40,7 @@ public class Player {       //Gestamte Klasse selber geschrieben
     }
 
     public void tick() {
-        if(health == 0){
-            System.out.println("You DIED!");
-            System.exit(0);
-        }
+
         hitBox.x = (int) x;
         hitBox.y = (int) y;
 
@@ -119,6 +116,8 @@ public class Player {       //Gestamte Klasse selber geschrieben
         }
         g2.drawRect(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
         g2.drawImage(resplayer, (int) x, (int) y, null);
+
+
 
     }
 }

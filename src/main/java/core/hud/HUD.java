@@ -1,5 +1,6 @@
 package main.java.core.hud;
 
+import main.java.core.Window;
 import main.java.level.LevelHandler;
 
 import javax.imageio.ImageIO;
@@ -13,12 +14,16 @@ public class HUD {
     LevelHandler lH;
     Font font;
 
+    Graphics g;
     BufferedImage heart, deadHeart, heartOverlay;
     Color transparent = new Color(160, 160, 160, 191);
     Rectangle hud = new Rectangle(0, 25, 100, 60);
 
-    public HUD(LevelHandler lH) {
+    Window w;
+
+    public HUD(LevelHandler lH, Window w) {
         this.lH = lH;
+        this.w = w;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/fonts/RobotoMono-Bold.ttf")));
             font = font.deriveFont(Font.PLAIN, 20);
@@ -32,6 +37,7 @@ public class HUD {
 
     public void Render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
+        this.g = g;
         g2.setFont(font);
         g2.setColor(transparent);
         g2.fill(hud);
@@ -175,4 +181,14 @@ public class HUD {
                 break;
         }
     }
+
+    public void DeathScreen(Graphics g){
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(Color.BLACK);
+        g2.fillRect(0,0, w.getWidth(), w.getHeight());
+        g2.setColor(Color.RED);
+        g2.drawString("You DIED", w.getWidth()/2, w.getHeight()/2);
+    }
+
+
 }
