@@ -22,6 +22,7 @@ public class Player {       //Gestamte Klasse selber geschrieben
 
     public boolean falling = true;
 
+    public boolean alive = true;
 
     public Rectangle hitBox;
     public boolean collisionOn = true;
@@ -116,8 +117,6 @@ public class Player {       //Gestamte Klasse selber geschrieben
         }
         g2.drawRect(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
         g2.drawImage(resplayer, (int) x, (int) y, null);
-
-
 
     }
 }

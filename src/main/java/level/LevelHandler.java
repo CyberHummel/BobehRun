@@ -6,12 +6,8 @@ import main.java.level.objects.items.Item_Manager;
 import main.java.level.objects.npc.NpcHandler;
 import main.java.level.objects.tiles.Tile_Manager;
 import main.java.core.Window;
-
-
 import main.java.level.objects.Player;
-
 import java.awt.*;
-
 
 //gesamte Classe seber
 public class LevelHandler extends Thread{
@@ -31,7 +27,6 @@ public class LevelHandler extends Thread{
     public HUD hud;
 
     public NpcHandler npcH;
-
     Window w;
 
     public LevelHandler(Window w) {
@@ -76,8 +71,10 @@ public class LevelHandler extends Thread{
         hud.Render(g);
         if(player.health <= 0){
             hud.DeathScreen(g);
-            System.out.println("You DIED!");
+            if(player.alive){
 
+                player.alive = false;
+            }
         }
     }
 
