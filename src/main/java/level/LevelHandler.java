@@ -27,7 +27,7 @@ public class LevelHandler extends Thread{
     public HUD hud;
 
     public NpcHandler npcH;
-    Window w;
+    public Window w;
 
     public LevelHandler(Window w) {
         this.w = w;

@@ -5,9 +5,11 @@ import main.java.core.Window;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class keylistener implements KeyListener {       //gesamte Klasse selber
+public class keylistener extends Thread implements KeyListener {       //gesamte Klasse selber
     private final Window w;
     public boolean Moving = false;
+
+    int key;
 
 
     public keylistener(Window w) {
@@ -24,6 +26,7 @@ public class keylistener implements KeyListener {       //gesamte Klasse selber
 
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
+        this.key = key;
 
         if (key == KeyEvent.VK_D) {
             Moving = true;
@@ -43,7 +46,6 @@ public class keylistener implements KeyListener {       //gesamte Klasse selber
                 w.level.player.jumping = true;
             }
         }
-
     }
 
 
@@ -52,13 +54,11 @@ public class keylistener implements KeyListener {       //gesamte Klasse selber
         if (key == KeyEvent.VK_D && !MovingLeft) {
             Moving = false;
             w.level.player.velx = 0;
-
         }
 
         if (key == KeyEvent.VK_A && MovingLeft) {
             Moving = false;
             w.level.player.velx = 0;
-
         }
 
         if (key == KeyEvent.VK_SPACE) {
@@ -67,5 +67,18 @@ public class keylistener implements KeyListener {       //gesamte Klasse selber
         }
 
 
+    }
+
+    public void run(){
+        while (w.level.player.alive){
+            if(key == KeyEvent.VK_Q){
+                w.level.player.Attack_Q();
+                try {
+                    Thread.sleep(w.level.player.attackDelay_Q);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 }

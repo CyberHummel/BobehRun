@@ -43,6 +43,7 @@ public class Window extends Canvas implements Runnable {
         frame.setLocation(1,1);
         frame.setSize(Width +1, Heigth);
         level.start();
+        Keylistener.start();
     }
 
 

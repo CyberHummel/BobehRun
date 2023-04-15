@@ -11,6 +11,8 @@ import java.util.Objects;
 
 public class Player {       //Gestamte Klasse selber geschrieben
     public Window w;
+
+    public boolean canAttack_Q = true;
     public boolean jumping;
     public int width, height;
     public int health = 100;
@@ -19,15 +21,14 @@ public class Player {       //Gestamte Klasse selber geschrieben
     public double velx, vely;
     public double JumpVelocity = 5;
     public int speed = 2;
-
     public boolean falling = true;
-
     public boolean alive = true;
-
+    public int attackDelay_Q = 2500;
     public Rectangle hitBox;
     public boolean collisionOn = true;
-
     public LevelHandler lH;
+
+    public int attackDamage_Q = 25;
 
     public Player(Window w, int x, int y, int width, int height, LevelHandler lH) {
         this.w = w;
@@ -118,5 +119,16 @@ public class Player {       //Gestamte Klasse selber geschrieben
         g2.drawRect(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
         g2.drawImage(resplayer, (int) x, (int) y, null);
 
+    }
+    public void Attack_Q(){
+        for(int i = 0; i < lH.npcH.enemies.length; i++){
+            if(hitBox.intersects(lH.npcH.enemies[i].hitbox)){
+                canAttack_Q = false;
+                lH.npcH.enemies[i].health -= attackDamage_Q;
+                System.out.println(lH.npcH.enemies[i].health);
+            }else {
+                System.out.println("You cannot attack!");
+            }
+        }
     }
 }

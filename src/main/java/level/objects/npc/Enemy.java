@@ -10,24 +10,21 @@ import java.util.Objects;
 
 
 public class Enemy extends Thread{
-
-
     private int x, y, sizeX, sizeY;
-
     private double vely, velx;
-    private int damage = 10;
-
-    private int attackDelay = 1000;
+    private final int damage = 10;
+    private final int attackSpeed = 1;
+    private final double defendSpeed = 1;
+    private final int attackDelay = 2000;
     BufferedImage texture;
     public boolean dead = false;
     private boolean falling;
     public int health = 100;
+    public final int maxhealth = 100;
     private Tile_Manager tM;
      LevelHandler lH;
     public Rectangle hitbox;
     int maxDistance;
-
-
 
     public Enemy(int x, int y, int sizeX, int sizeY, String texturePath, LevelHandler lH, int maxDistance) {
         this.x = x;
@@ -38,7 +35,6 @@ public class Enemy extends Thread{
         this.lH = lH;
         this.tM = lH.tileM;
         this.maxDistance = maxDistance;
-
 
         try {
             texture = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath)));
@@ -53,10 +49,12 @@ public class Enemy extends Thread{
             p.health -= damage;
         }
         }
-
     }
 
     public void tick() {
+        if(health == 0){
+            dead = true;
+        }
         hitbox.x = x;
         hitbox.y = y;
         if (falling) {
@@ -89,6 +87,8 @@ public class Enemy extends Thread{
             g2.setColor(Color.BLACK);
             g2.draw(hitbox);
             g2.drawImage(texture, x, y, sizeX, sizeY, null);
+            g2.setColor(Color.RED);
+            g2.drawString("Health" + health, x, y);
         }
     }
 
@@ -99,34 +99,24 @@ public class Enemy extends Thread{
     public void MoveToPlayer(int maxDistance, Player p) {
         if (!dead) {
             int Distance = CalculateDistance(p);
-            if (health >= 50) {
+            if (health >= maxhealth/2 && x != 0) {
                 if (Distance <= maxDistance) {
                     if (Distance > 0 && !hitbox.intersects(p.hitBox)) {
-                        velx = -1.5;
-                        Distance = CalculateDistance(p);
+                        velx = -attackSpeed;
                         x += velx;
                     } else if (Distance < 0 && !hitbox.intersects(p.hitBox)) {
-                        velx = 1.5;
-                        Distance = CalculateDistance(p);
+                        velx = attackSpeed;
                         x += velx;
-
                     }
                 }
             }else{
-                if(Distance <= maxDistance){
+                if(Distance <= maxDistance && x < lH.w.FrameWidth/2){
                     if (Distance > 0) {
-                        velx = 1.5;
-                        Distance = CalculateDistance(p);
+                        velx = defendSpeed;
                         x += velx;
                     } else if (Distance < 0) {
-                        velx = -1.5;
-                        Distance = CalculateDistance(p);
+                        velx = -defendSpeed;
                         x += velx;
-
-                    } else if (hitbox.intersects(p.hitBox)) {
-                        velx = 1.5;
-                        x += velx;
-                        Distance = CalculateDistance(p);
                     }
                 }
             }
