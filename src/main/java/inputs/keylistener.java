@@ -8,7 +8,6 @@ import java.awt.event.KeyListener;
 public class keylistener extends Thread implements KeyListener {       //gesamte Klasse selber
     private final Window w;
     public boolean Moving = false;
-
     int key;
 
 

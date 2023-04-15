@@ -1,5 +1,7 @@
 package main.java.core;
 
+import main.java.core.hud.MainMenu;
+import main.java.inputs.MouseListener;
 import main.java.inputs.keylistener;
 import main.java.level.LevelHandler;
 
@@ -20,11 +22,12 @@ public class Window extends Canvas implements Runnable {
     private Thread thread;
     private boolean running = false;
     public final keylistener Keylistener = new keylistener(this);
+    public final MouseListener MouseListener = new MouseListener(this);
 
     public LevelHandler level = new LevelHandler(this);
     public int FrameWidth, FrameHeight;
     public int FPS;
-
+    public MainMenu mM = new MainMenu(this);
     BufferedImage icon;
 
 
@@ -51,6 +54,7 @@ public class Window extends Canvas implements Runnable {
         thread = new Thread(this);
         thread.start();
         running = true;
+
     }
 
     public void stop() {

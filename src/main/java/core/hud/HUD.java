@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class HUD {
+public class HUD { //gesamte Klasse selber
     public int Coins;
     LevelHandler lH;
     Font font;

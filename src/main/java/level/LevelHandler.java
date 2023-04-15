@@ -76,6 +76,10 @@ public class LevelHandler extends Thread{
                 player.alive = false;
             }
         }
+
+        if(w.mM.active){
+            w.mM.Render(g);
+        }
     }
 
     public void tick() {
