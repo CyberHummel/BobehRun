@@ -10,7 +10,10 @@ import java.util.Objects;
 
 
 public class Enemy extends Thread{
-    private int x, y, sizeX, sizeY;
+    private int x;
+    private int y;
+    private final int sizeX;
+    private final int sizeY;
     private double vely, velx;
     private final int damage = 10;
     private final int attackSpeed = 1;
@@ -21,7 +24,7 @@ public class Enemy extends Thread{
     private boolean falling;
     public int health = 100;
     public final int maxhealth = 100;
-    private Tile_Manager tM;
+    private final Tile_Manager tM;
      LevelHandler lH;
     public Rectangle hitbox;
     int maxDistance;
@@ -44,7 +47,7 @@ public class Enemy extends Thread{
     }
 
     public void Attack(Player p){
-        if(p.hitBox.intersects(hitbox)){
+        if(p.hitboxBody.intersects(hitbox)){
         if(p.health != 0){
             p.health -= damage;
         }
@@ -101,10 +104,10 @@ public class Enemy extends Thread{
             int Distance = CalculateDistance(p);
             if (health >= maxhealth/2 && x != 0) {
                 if (Distance <= maxDistance) {
-                    if (Distance > 0 && !hitbox.intersects(p.hitBox)) {
+                    if (Distance > 0 && !hitbox.intersects(p.hitboxBody)) {
                         velx = -attackSpeed;
                         x += velx;
-                    } else if (Distance < 0 && !hitbox.intersects(p.hitBox)) {
+                    } else if (Distance < 0 && !hitbox.intersects(p.hitboxBody)) {
                         velx = attackSpeed;
                         x += velx;
                     }

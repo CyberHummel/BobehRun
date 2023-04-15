@@ -38,9 +38,9 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
         } else if (key == KeyEvent.VK_SPACE) {
             if (w.level.player.jumpable) {
                 w.level.player.y -= 4;
-                w.level.player.hitBox.y -= 4;
+                w.level.player.hitBoxFeet.y -= 4;
                 w.level.player.y -= 4;
-                w.level.player.hitBox.y -= 4;
+                w.level.player.hitBoxFeet.y -= 4;
                 w.level.player.vely = -w.level.player.JumpVelocity;
                 w.level.player.jumping = true;
             }

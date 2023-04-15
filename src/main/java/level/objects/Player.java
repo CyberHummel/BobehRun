@@ -24,7 +24,7 @@ public class Player {       //Gestamte Klasse selber geschrieben
     public boolean falling = true;
     public boolean alive = true;
     public int attackDelay_Q = 2500;
-    public Rectangle hitBox;
+    public Rectangle hitBoxFeet, hitboxBody ;
     public boolean collisionOn = true;
     public LevelHandler lH;
 
@@ -37,15 +37,28 @@ public class Player {       //Gestamte Klasse selber geschrieben
         this.width = width;
         this.height = height;
         this.lH = lH;
-        hitBox = new Rectangle(x, y, width, height);
+        hitBoxFeet = new Rectangle(x+(width/8), y+(height-10), width/4, 10);
+        hitboxBody = new Rectangle(x+(width/4), y, width/2, height);
 
     }
 
     public void tick() {
 
-        hitBox.x = (int) x;
-        hitBox.y = (int) y;
+        hitBoxFeet.x = (int) x+(width/3 + 5);
+        hitBoxFeet.y = (int) y+(height-10);
+        hitboxBody.x = (int) x+(width/4);
+        hitboxBody.y = (int) y -10;
 
+        for (int i = 0; i < lH.tileM.tiles.length; i++){
+            if(lH.tileM.tiles[i].collission){
+                if(lH.tileM.tiles[i].hitbox.intersects(hitboxBody)){
+                    y -= 8;
+                    hitboxBody.y = (int) y;
+                    hitBoxFeet.y = (int) y;
+                    vely = -JumpVelocity;
+                }
+            }
+        }
 
         if ((w.FrameWidth / 2) == x && !w.Keylistener.MovingLeft) {
             x = w.FrameWidth / 2;
@@ -80,9 +93,9 @@ public class Player {       //Gestamte Klasse selber geschrieben
         if (collisionOn && !jumping) {
             for (int i = 0; i < lH.tileM.tiles.length; i++) {
                 if (lH.tileM.tiles[i].collission) {
-                    if (hitBox.intersects(lH.tileM.tiles[i].hitbox)) {
+                    if (hitBoxFeet.intersects(lH.tileM.tiles[i].hitbox)) {
                         y = lH.tileM.tiles[i].y - height + 2;
-                        hitBox.y = (int) y;
+                        hitBoxFeet.y = (int) y;
                         jumpable = true;
                         falling = false;
                     } else {
@@ -99,7 +112,7 @@ public class Player {       //Gestamte Klasse selber geschrieben
 
     public void ItemCollission() {
         for (int i = 0; i < lH.itemM.items.length; i++) {
-            if (hitBox.intersects(lH.itemM.items[i].hitbox)) {
+            if (hitBoxFeet.intersects(lH.itemM.items[i].hitbox)) {
                 lH.itemM.items[i].pickUp(this);
             }
         }
@@ -116,13 +129,14 @@ public class Player {       //Gestamte Klasse selber geschrieben
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        g2.drawRect(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
+        g2.drawRect(hitBoxFeet.x, hitBoxFeet.y, hitBoxFeet.width, hitBoxFeet.height);
+        g2.draw(hitboxBody);
         g2.drawImage(resplayer, (int) x, (int) y, null);
 
     }
     public void Attack_Q(){
         for(int i = 0; i < lH.npcH.enemies.length; i++){
-            if(hitBox.intersects(lH.npcH.enemies[i].hitbox)){
+            if(hitboxBody.intersects(lH.npcH.enemies[i].hitbox)){
                 canAttack_Q = false;
                 lH.npcH.enemies[i].health -= attackDamage_Q;
                 System.out.println(lH.npcH.enemies[i].health);
