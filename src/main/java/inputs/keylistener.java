@@ -24,6 +24,9 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
     public boolean MovingLeft = false;
 
     public void keyPressed(KeyEvent e) {
+        Moving = true;
+        System.out.println(Moving);
+        System.out.println(MovingLeft);
         int key = e.getKeyCode();
         this.key = key;
 
@@ -31,10 +34,12 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
             Moving = true;
             w.level.player.velx = w.level.player.speed;
             MovingLeft = false;
+            w.level.player.directionX = 1;
         } else if (key == KeyEvent.VK_A) {
             Moving = true;
             MovingLeft = true;
             w.level.player.velx = -w.level.player.speed;
+            w.level.player.directionX = -1;
         } else if (key == KeyEvent.VK_SPACE) {
             if (w.level.player.jumpable) {
                 w.level.player.y -= 4;
@@ -53,11 +58,13 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
         if (key == KeyEvent.VK_D && !MovingLeft) {
             Moving = false;
             w.level.player.velx = 0;
+            w.level.player.directionX = 0;
         }
 
         if (key == KeyEvent.VK_A && MovingLeft) {
             Moving = false;
             w.level.player.velx = 0;
+            w.level.player.directionX = 0;
         }
 
         if (key == KeyEvent.VK_SPACE) {

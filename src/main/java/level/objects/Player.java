@@ -29,6 +29,11 @@ public class Player {       //Gestamte Klasse selber geschrieben
     public LevelHandler lH;
 
     public int attackDamage_Q = 25;
+    public int directionX = 0;
+
+    BufferedImage left1, left2, right1, right2, jump1, jump2, falling1, falling2;
+    BufferedImage player;
+    int spriteNum = 1;
 
     public Player(Window w, int x, int y, int width, int height, LevelHandler lH) {
         this.w = w;
@@ -39,6 +44,8 @@ public class Player {       //Gestamte Klasse selber geschrieben
         this.lH = lH;
         hitBoxFeet = new Rectangle(x+(width/8), y+(height-10), width/4, 10);
         hitboxBody = new Rectangle(x+(width/4), y, width/2, height);
+        getPlayerSprites();
+        player = left1;
 
     }
 
@@ -87,6 +94,26 @@ public class Player {       //Gestamte Klasse selber geschrieben
             vely += 0.2;
         }
 
+        switch (directionX){
+            case 0:
+                if(spriteNum == 1){
+                    player = right2;
+                    spriteNum = 2;
+                    break;
+                }else if(spriteNum == 2){
+                    player = right1;
+                    spriteNum = 1;
+                    break;
+                }
+
+            case -1:
+                player = left1;
+                break;
+            case 1:
+                player = right1;
+                break;
+        }
+
     }
 
     public void Collision() {
@@ -119,16 +146,23 @@ public class Player {       //Gestamte Klasse selber geschrieben
     }
 
 
+    public void getPlayerSprites(){
+        try {
+             right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/player.png")));
+             left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/left1.png")));
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void Render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
 
         Image resplayer;
-        try {
-            BufferedImage player = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player.png")));
-            resplayer = player.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        resplayer = player.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+
         g2.drawRect(hitBoxFeet.x, hitBoxFeet.y, hitBoxFeet.width, hitBoxFeet.height);
         g2.draw(hitboxBody);
         g2.drawImage(resplayer, (int) x, (int) y, null);
