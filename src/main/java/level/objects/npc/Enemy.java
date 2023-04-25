@@ -19,17 +19,21 @@ public class Enemy extends Thread{
     private final int attackSpeed = 1;
     private final double defendSpeed = 1;
     private final int attackDelay = 2000;
-    BufferedImage texture;
+    BufferedImage texture_idle, texture_left1, texture_left2, texture_right1, texture_right2;
+    public BufferedImage texture;
     public boolean dead = false;
     private boolean falling;
+
     public int health = 100;
     public final int maxhealth = 100;
     private final Tile_Manager tM;
      LevelHandler lH;
     public Rectangle hitbox;
     int maxDistance;
+    int direction = 0;
+    int spriteNum = 1;
 
-    public Enemy(int x, int y, int sizeX, int sizeY, String texturePath, LevelHandler lH, int maxDistance) {
+    public Enemy(int x, int y, int sizeX, int sizeY, String texturePath, String texturePath_FLeft1, String texturePath_FLeft2, String texturePath_FRight1, String texturePath_FRight2, LevelHandler lH, int maxDistance) {
         this.x = x;
         this.y = y;
         this.sizeX = sizeX;
@@ -41,9 +45,16 @@ public class Enemy extends Thread{
 
         try {
             texture = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath)));
+            texture_idle = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath)));
+            texture_left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath_FLeft1)));
+            texture_left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath_FLeft2)));
+            texture_right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath_FRight1)));
+            texture_right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath_FRight2)));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+
     }
 
     public void Attack(Player p){
@@ -85,8 +96,40 @@ public class Enemy extends Thread{
 
 
     public void Render(Graphics g) {
+
         Graphics2D g2 = (Graphics2D) g;
         if (!dead) {
+            if(direction == -1){
+                if(spriteNum < 10){
+                    spriteNum ++;
+                    texture = texture_left1;
+                    if(spriteNum == 10){
+                        spriteNum = 11;
+                    }
+                }else if(spriteNum > 10 && spriteNum < 20){
+                    spriteNum++;
+                    texture = texture_left2;
+                    if(spriteNum == 20){
+                        spriteNum = 0;
+                    }
+                }
+            } else if (direction == 0) {
+                texture = texture_idle;
+            } else if (direction == 1) {
+                if(spriteNum < 10){
+                    spriteNum ++;
+                    texture = texture_right1;
+                    if(spriteNum == 10){
+                        spriteNum = 11;
+                    }
+                }else if(spriteNum > 10 && spriteNum < 20){
+                    spriteNum++;
+                    texture = texture_right2;
+                    if(spriteNum == 20){
+                        spriteNum = 0;
+                    }
+                }
+            }
             g2.setColor(Color.BLACK);
             g2.draw(hitbox);
             g2.drawImage(texture, x, y, sizeX, sizeY, null);
@@ -105,9 +148,11 @@ public class Enemy extends Thread{
             if (health >= maxhealth/2 && x != 0) {
                 if (Distance <= maxDistance) {
                     if (Distance > 0 && !hitbox.intersects(p.hitboxBody)) {
+                        direction = -1;
                         velx = -attackSpeed;
                         x += velx;
                     } else if (Distance < 0 && !hitbox.intersects(p.hitboxBody)) {
+                        direction = 1;
                         velx = attackSpeed;
                         x += velx;
                     }
@@ -116,9 +161,11 @@ public class Enemy extends Thread{
                 if(Distance <= maxDistance && x < lH.w.FrameWidth/2){
                     if (Distance > 0) {
                         velx = defendSpeed;
+                        direction = 1;
                         x += velx;
                     } else if (Distance < 0) {
                         velx = -defendSpeed;
+                        direction = -1;
                         x += velx;
                     }
                 }
@@ -136,4 +183,7 @@ public class Enemy extends Thread{
             }
         }
     }
+
+
+
 }

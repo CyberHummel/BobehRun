@@ -12,8 +12,16 @@ import java.awt.*;
 //gesamte Classe seber
 public class LevelHandler extends Thread{
 
+    Graphics g;
+    public NpcHandler npcH;
+    boolean inited = false;
     public void Run(Graphics g){
+        if(!inited){
+            INITG(g);
+            inited = true;
+        }
         Render(g);
+        this.g = g;
     }
     public double Gravity = 4;
 
@@ -25,14 +33,11 @@ public class LevelHandler extends Thread{
     public BackroundHandler bM = new BackroundHandler(this);
 
     public HUD hud;
-
-    public NpcHandler npcH;
     public Window w;
 
     public LevelHandler(Window w) {
         this.w = w;
         player = new Player(w, 100, 100, 84, 84, this);
-        npcH = new NpcHandler(1,this, player);
         hud =  new HUD(this, w);
         System.out.println(player);
 
@@ -41,11 +46,19 @@ public class LevelHandler extends Thread{
         tileM.buildLevel();
 
         itemM.loadItems(this);
-        npcH.SpawnNpcs();
+        System.out.println(g);
 
         bM.Build(2, 1);
-        npcH.tickOn();
 
+
+    }
+
+    public void INITG(Graphics g){
+        Graphics2D g2 =( Graphics2D) g;
+        npcH = new NpcHandler(1,this, player);
+        npcH.SpawnNpcs(g2);
+        npcH.tickOn();
+        System.out.println(g2);
     }
 
     public void updateObstacles(int speed, double cloudSpeed, double abstractBackroundSpeed) {
@@ -58,6 +71,7 @@ public class LevelHandler extends Thread{
 
 
     public void Render(Graphics g) {
+
         tileM.RenderAir(g);
         bM.Render(g);
         tileM.RenderNonAir(g);
@@ -83,8 +97,6 @@ public class LevelHandler extends Thread{
     }
 
     public void tick() {
-
-
         player.Collision();
         player.ItemCollission();
         player.tick();

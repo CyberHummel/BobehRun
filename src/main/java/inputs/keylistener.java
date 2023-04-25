@@ -25,8 +25,8 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
 
     public void keyPressed(KeyEvent e) {
         Moving = true;
-        System.out.println(Moving);
-        System.out.println(MovingLeft);
+        //System.out.println(Moving);
+        //System.out.println(MovingLeft);
         int key = e.getKeyCode();
         this.key = key;
 
@@ -81,6 +81,7 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
                 w.level.player.Attack_Q();
                 try {
                     Thread.sleep(w.level.player.attackDelay_Q);
+                    System.out.println("You can attack!");
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

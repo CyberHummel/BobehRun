@@ -17,6 +17,7 @@ import java.util.Objects;
 
 public class Window extends Canvas implements Runnable {
 
+    public BufferStrategy bs;
     @Serial
     private static final long serialVersionUID = 1L;
     private Thread thread;
@@ -24,11 +25,12 @@ public class Window extends Canvas implements Runnable {
     public final keylistener Keylistener = new keylistener(this);
     public final MouseListener MouseListener = new MouseListener(this);
 
-    public LevelHandler level = new LevelHandler(this);
     public int FrameWidth, FrameHeight;
     public int FPS;
     public MainMenu mM = new MainMenu(this);
     BufferedImage icon;
+
+    public LevelHandler level = new LevelHandler(this);
 
 
     public Window(String Title, int Width, int Heigth) throws IOException {
@@ -54,7 +56,6 @@ public class Window extends Canvas implements Runnable {
         thread = new Thread(this);
         thread.start();
         running = true;
-
     }
 
     public void stop() {
@@ -67,7 +68,7 @@ public class Window extends Canvas implements Runnable {
     }
 
     public void Render() {
-        BufferStrategy bs = this.getBufferStrategy();
+         bs = this.getBufferStrategy();
 
         if (bs == null) {
             this.createBufferStrategy(2);
@@ -92,6 +93,7 @@ public class Window extends Canvas implements Runnable {
 
     @Override
     public void run() {
+
         long lasTime = System.nanoTime();
         double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
@@ -106,12 +108,16 @@ public class Window extends Canvas implements Runnable {
             delta += (now - lasTime) / ns;
             lasTime = now;
             while (delta >= 1) {
+                Render();
                 tick();
+                //
+
                 updates++;
                 delta--;
             }
 
-            Render();
+
+
             frames++;
 
             if (System.currentTimeMillis() - timer > 1000) {           //nicht selber

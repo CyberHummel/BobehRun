@@ -4,6 +4,7 @@
     <option name="excludedDirectories">
       <list>
         <option value="$PROJECT_DIR$/src/main/ressources/fonts" />
+        <option value="$PROJECT_DIR$/src/main/ressources/sounds" />
       </list>
     </option>
   </component>

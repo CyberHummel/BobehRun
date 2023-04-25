@@ -17,8 +17,8 @@ public class NpcHandler {
         this.p = p;
     }
 
-    public void SpawnNpcs(){
-        enemies[0] = new Enemy(400,400, 96, 48, "/main/ressources/textures/Wildschwein.png", lH, 200);
+    public void SpawnNpcs(Graphics2D g){
+        enemies[0] = new Enemy(400,400, 96, 48, "/main/ressources/textures/Wildschwein/WildschweinIdle.png","/main/ressources/textures/Wildschwein/WildschweinFacingLeft1.png","/main/ressources/textures/Wildschwein/WildschweinFacingLeft2.png","/main/ressources/textures/Wildschwein/WildschweinFacingRight1.png","/main/ressources/textures/Wildschwein/WildschweinFacingRight2.png", lH, 200);
     }
 
     public void Render(Graphics g){

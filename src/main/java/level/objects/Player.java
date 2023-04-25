@@ -96,16 +96,8 @@ public class Player {       //Gestamte Klasse selber geschrieben
 
         switch (directionX){
             case 0:
-                if(spriteNum == 1){
-                    player = right2;
-                    spriteNum = 2;
-                    break;
-                }else if(spriteNum == 2){
-                    player = right1;
-                    spriteNum = 1;
-                    break;
-                }
-
+                player = right1;
+                break;
             case -1:
                 player = left1;
                 break;
