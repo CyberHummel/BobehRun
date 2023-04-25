@@ -6497,3 +6497,8 @@
 {"ts":1682437827711,"action":"FILE_OPENED","file":"/src/main/java/core/Run.java","tags":{"FILE_LINE_OF_CODE":"11"}}
 {"ts":1682437830059,"action":"IDE_DEACTIVATED"}
 {"ts":1682437909335,"action":"IDE_ACTIVATED"}
+{"ts":1682437933611,"action":"IDE_DEACTIVATED"}
+{"ts":1682437933823,"action":"FILE_CLOSED","file":"/src/main/java/core/Run.java","tags":{"FILE_LINE_OF_CODE":"11"}}
+{"ts":1682437933905,"action":"PROJECT_CLOSED","tags":{"PROJECT_NAME":"BobehRun"}}
+{"ts":1682438014512,"action":"FILE_OPENED","file":"/src/main/java/core/Run.java","tags":{"FILE_LINE_OF_CODE":"11"}}
+{"ts":1682438015764,"action":"PROJECT_OPENED","tags":{"PROJECT_NAME":"BobehRun"}}
