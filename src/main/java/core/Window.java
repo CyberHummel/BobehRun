@@ -47,8 +47,9 @@ public class Window extends Canvas implements Runnable {
         frame.setBackground(Color.white);
         frame.setLocation(1,1);
         frame.setSize(Width +1, Heigth);
-        level.start();
         Keylistener.start();
+        level.start();
+
     }
 
 
@@ -122,7 +123,8 @@ public class Window extends Canvas implements Runnable {
 
             if (System.currentTimeMillis() - timer > 1000) {           //nicht selber
                 timer += 1000;
-                System.out.println("FPS:" + frames + "Ticks:" + updates);
+                frames = frames /1000000;
+                System.out.println("FPS:" + frames + "M" + "Ticks:" + updates);
                 FPS = frames;
                 //DUI.updateLabels(FPS);
                 frames = 0;

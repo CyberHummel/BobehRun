@@ -31,7 +31,7 @@ public class Player {       //Gestamte Klasse selber geschrieben
     public int attackDamage_Q = 25;
     public int directionX = 0;
 
-    BufferedImage left1, left2, right1, right2, jump1, jump2, falling1, falling2;
+    BufferedImage left1, left2, right1, right2, idle1, idle2;
     BufferedImage player;
     int spriteNum = 1;
 
@@ -95,15 +95,58 @@ public class Player {       //Gestamte Klasse selber geschrieben
         }
 
         switch (directionX){
-            case 0:
-                player = right1;
+            case 0:{
+                if(spriteNum < 10){
+                    spriteNum ++;
+                    player = idle1;
+                    if(spriteNum == 10){
+                        spriteNum = 11;
+                    }
+                }else if(spriteNum > 10 && spriteNum < 20){
+                    spriteNum++;
+                    player = idle2;
+                    if(spriteNum == 20){
+                        spriteNum = 0;
+                    }
+            }
                 break;
-            case -1:
-                player = left1;
+            }
+            case -1:{
+                if(spriteNum < 10){
+                    spriteNum ++;
+                    player = left1;
+                    if(spriteNum == 10){
+                        spriteNum = 11;
+                    }
+                }else if(spriteNum > 10 && spriteNum < 20){
+                    spriteNum++;
+                    player = left2;
+                    if(spriteNum == 20){
+                        spriteNum = 0;
+                    }
+                }
                 break;
-            case 1:
-                player = right1;
+            }
+
+
+            case 1:{
+                if(spriteNum < 10){
+                    spriteNum ++;
+                    player = right1;
+                    if(spriteNum == 10){
+                        spriteNum = 11;
+                    }
+                }else if(spriteNum > 10 && spriteNum < 20){
+                    spriteNum++;
+                    player = right2;
+                    if(spriteNum == 20){
+                        spriteNum = 0;
+                    }
+                }
                 break;
+            }
+
+
         }
 
     }
@@ -140,9 +183,12 @@ public class Player {       //Gestamte Klasse selber geschrieben
 
     public void getPlayerSprites(){
         try {
-             right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/player.png")));
-             left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/left1.png")));
-
+             right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/runningRight1.png")));
+             left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/runningLeft1.png")));
+             right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/runningRight2.png")));
+             left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/runningLeft2.png")));
+             idle1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/Idle1.png")));
+             idle2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/Idle2.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

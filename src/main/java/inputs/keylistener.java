@@ -10,16 +10,17 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
     public boolean Moving = false;
     int key;
 
-
     public keylistener(Window w) {
         this.w = w;
         w.addKeyListener(this);
     }
 
     public void keyTyped(KeyEvent e) {
+        key = e.getKeyCode();
+        if(key == KeyEvent.VK_Q){
 
+        }
     }
-
 
     public boolean MovingLeft = false;
 
@@ -49,6 +50,8 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
                 w.level.player.vely = -w.level.player.JumpVelocity;
                 w.level.player.jumping = true;
             }
+        } else if (key == KeyEvent.VK_Q) {
+            key = KeyEvent.VK_Q;
         }
     }
 
@@ -72,12 +75,13 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
             w.level.player.falling = true;
         }
 
-
     }
 
     public void run(){
         while (w.level.player.alive){
+            //System.out.println("k");
             if(key == KeyEvent.VK_Q){
+                System.out.println("s");
                 w.level.player.Attack_Q();
                 try {
                     Thread.sleep(w.level.player.attackDelay_Q);
