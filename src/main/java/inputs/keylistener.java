@@ -8,7 +8,7 @@ import java.awt.event.KeyListener;
 public class keylistener extends Thread implements KeyListener {       //gesamte Klasse selber
     private final Window w;
     public boolean Moving = false;
-    int key;
+    volatile int key;
 
     public keylistener(Window w) {
         this.w = w;
@@ -17,9 +17,6 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
 
     public void keyTyped(KeyEvent e) {
         key = e.getKeyCode();
-        if(key == KeyEvent.VK_Q){
-
-        }
     }
 
     public boolean MovingLeft = false;
@@ -78,9 +75,8 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
     }
 
     public void run(){
-        while (w.level.player.alive){
-            //System.out.println("k");
-            if(key == KeyEvent.VK_Q){
+        while (w.level.player.alive){// speichere den aktuellen Wert von key
+            if(key == KeyEvent.VK_Q){ // überprüfe den gespeicherten Wert von key
                 System.out.println("s");
                 w.level.player.Attack_Q();
                 try {

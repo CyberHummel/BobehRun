@@ -53,12 +53,11 @@ public class Enemy extends Thread{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
     public void Attack(Player p){
         if(p.hitboxBody.intersects(hitbox)){
+            texture = texture_idle;
         if(p.health != 0){
             p.health -= damage;
         }
@@ -99,6 +98,9 @@ public class Enemy extends Thread{
 
         Graphics2D g2 = (Graphics2D) g;
         if (!dead) {
+            if(velx == 0){
+                texture = texture_idle;
+            }
             if(direction == -1){
                 if(spriteNum < 10){
                     spriteNum ++;
@@ -129,6 +131,8 @@ public class Enemy extends Thread{
                         spriteNum = 0;
                     }
                 }
+            } else if (velx == 0) {
+                texture = texture_idle;
             }
             g2.setColor(Color.BLACK);
             g2.draw(hitbox);
@@ -156,6 +160,8 @@ public class Enemy extends Thread{
                         velx = attackSpeed;
                         x += velx;
                     }
+                }else {
+                    texture = texture_idle;
                 }
             }else{
                 if(Distance <= maxDistance && x < lH.w.FrameWidth/2){
@@ -172,7 +178,6 @@ public class Enemy extends Thread{
             }
         }
     }
-
     public void run(){
         while (health != 0 && lH.player.health != 0){
             Attack(lH.player);
@@ -183,7 +188,5 @@ public class Enemy extends Thread{
             }
         }
     }
-
-
 
 }
