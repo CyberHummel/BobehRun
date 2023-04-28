@@ -1,8 +1,8 @@
 # BobehRun
-NOTE: This Project is not finished, so therefore there are many bugs ;)
+NOTE: This Project is not finished. ;)
 
 # Release:
-The current release date is unknown.
+The current release date is Sunday the 30.04.23
 
 # Contriutors:
 CyberHummel
