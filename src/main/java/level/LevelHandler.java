@@ -1,6 +1,7 @@
 package main.java.level;
 
 import main.java.core.hud.HUD;
+import main.java.core.sound.SoundPlayer;
 import main.java.level.objects.backround.BackroundHandler;
 import main.java.level.objects.items.Item_Manager;
 import main.java.level.objects.npc.NpcHandler;
@@ -14,6 +15,8 @@ public class LevelHandler extends Thread{
 
     Graphics g;
     public NpcHandler npcH;
+
+    public SoundPlayer sP = new SoundPlayer();
     boolean inited = false;
     public void Run(Graphics g){
         if(!inited){
@@ -47,8 +50,9 @@ public class LevelHandler extends Thread{
 
         itemM.loadItems(this);
         System.out.println(g);
-
         bM.Build(2, 1);
+        sP.setFile(0);
+        sP.Playsound();
 
 
     }

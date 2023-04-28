@@ -46,7 +46,7 @@ public class Player {       //Gestamte Klasse selber geschrieben
         hitboxBody = new Rectangle(x+(width/4), y, width/2, height);
         getPlayerSprites();
         player = left1;
-
+        alive = true;
     }
 
     public void tick() {
@@ -175,7 +175,11 @@ public class Player {       //Gestamte Klasse selber geschrieben
     public void ItemCollission() {
         for (int i = 0; i < lH.itemM.items.length; i++) {
             if (hitBoxFeet.intersects(lH.itemM.items[i].hitbox)) {
+                if(!lH.itemM.items[i].pickedUp){
                 lH.itemM.items[i].pickUp(this);
+                lH.sP.setFile(0);
+                lH.sP.Playsound();
+                }
             }
         }
     }
@@ -211,6 +215,13 @@ public class Player {       //Gestamte Klasse selber geschrieben
             if(hitboxBody.intersects(lH.npcH.enemies[i].hitbox)){
                 canAttack_Q = false;
                 lH.npcH.enemies[i].health -= attackDamage_Q;
+                if(lH.npcH.enemies[i].health <= 0){
+                    lH.npcH.enemies[i].dead = true;
+                }
+                if(lH.npcH.enemies[i].dead){
+                    lH.sP.setFile(3);
+                    lH.sP.Playsound();
+                }
                 System.out.println(lH.npcH.enemies[i].health);
             }else {
                 System.out.println("You cannot attack!");

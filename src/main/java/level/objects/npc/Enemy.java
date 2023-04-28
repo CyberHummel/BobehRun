@@ -60,6 +60,13 @@ public class Enemy extends Thread{
             texture = texture_idle;
         if(p.health != 0){
             p.health -= damage;
+            lH.sP.setFile(2);
+            lH.sP.Playsound();
+            if(p.health <= 0){
+                p.alive = false;
+                lH.sP.setFile(1);
+                lH.sP.Playsound();
+            }
         }
         }
     }
