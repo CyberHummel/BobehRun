@@ -28,13 +28,11 @@ public class SoundPlayer {
     }
     public void Playsound(){
         clipCompleted = false;
-        if(!clipCompleted){
         clip.start();
         while (clip.isActive()){
             if(!clip.isActive()){
                 clipCompleted = true;
             }
-        }
         }
     }
 }
