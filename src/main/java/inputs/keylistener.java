@@ -47,8 +47,6 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
                 w.level.player.vely = -w.level.player.JumpVelocity;
                 w.level.player.jumping = true;
             }
-        } else if (key == KeyEvent.VK_Q) {
-            key = KeyEvent.VK_Q;
         }
     }
 
@@ -79,12 +77,15 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
             if(key == KeyEvent.VK_Q){ // überprüfe den gespeicherten Wert von key
                 System.out.println("s");
                 w.level.player.Attack_Q();
-                try {
-                    Thread.sleep(w.level.player.attackDelay_Q);
-                    System.out.println("You can attack!");
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                if(!w.level.player.canAttack_Q){
+                    try {
+                        Thread.sleep(w.level.player.attackDelay_Q);
+                        System.out.println("You can attack!");
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
+
             }
         }
     }

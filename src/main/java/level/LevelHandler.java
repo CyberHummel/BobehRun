@@ -53,7 +53,7 @@ public class LevelHandler extends Thread{
         bM.Build(2, 1);
         sP.setFile(0);
         sP.Playsound();
-
+        sP.PlayBackround();
 
     }
 

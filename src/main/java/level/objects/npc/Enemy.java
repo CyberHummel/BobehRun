@@ -19,7 +19,7 @@ public class Enemy extends Thread{
     private final int attackSpeed = 1;
     private final double defendSpeed = 1;
     private final int attackDelay = 2000;
-    BufferedImage texture_idle, texture_left1, texture_left2, texture_right1, texture_right2;
+    BufferedImage texture_idle, texture_left1, texture_left2, texture_right1, texture_right2, attackLeft, attackRight;
     public BufferedImage texture;
     public boolean dead = false;
     private boolean falling;
@@ -50,6 +50,8 @@ public class Enemy extends Thread{
             texture_left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath_FLeft2)));
             texture_right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath_FRight1)));
             texture_right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath_FRight2)));
+            attackLeft = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Wildschwein/WildschweinAttackLeft.png")));
+            attackRight = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Wildschwein/WildschweinAttackRight.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -57,8 +59,24 @@ public class Enemy extends Thread{
 
     public void Attack(Player p){
         if(p.hitboxBody.intersects(hitbox)){
-            texture = texture_idle;
-        if(p.health != 0){
+            if(p.health != 0){
+                if(direction == -1){
+                    texture = attackLeft;
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    texture = texture_left1;
+                }else if(direction == 1){
+                    texture = attackRight;
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    texture = texture_right1;
+                }
             p.health -= damage;
             lH.sP.setFile(2);
             lH.sP.Playsound();
@@ -83,6 +101,55 @@ public class Enemy extends Thread{
         if (vely < lH.Gravity) {
             vely += 0.2;
         }
+
+        if(!hitbox.intersects(lH.player.hitboxBody)){
+        switch (direction){
+            case 0:{
+                if(spriteNum < 10){
+                    spriteNum ++;
+                    texture = texture_idle;
+                    if(spriteNum == 10){
+                        spriteNum = 11;
+                    }
+                }
+                break;
+            }
+            case -1:{
+                if(spriteNum < 10){
+                    spriteNum ++;
+                    texture = texture_left1;
+                    if(spriteNum == 10){
+                        spriteNum = 11;
+                    }
+                }else if(spriteNum > 10 && spriteNum < 20){
+                    spriteNum++;
+                    texture = texture_left2;
+                    if(spriteNum == 20){
+                        spriteNum = 0;
+                    }
+                }
+                break;
+            }
+
+
+            case 1:{
+                if(spriteNum < 10){
+                    spriteNum ++;
+                    texture = texture_right1;
+                    if(spriteNum == 10){
+                        spriteNum = 11;
+                    }
+                }else if(spriteNum > 10 && spriteNum < 20){
+                    spriteNum++;
+                    texture = texture_right2;
+                    if(spriteNum == 20){
+                        spriteNum = 0;
+                    }
+                }
+                break;
+            }
+        }
+        }
     }
     public void Colission() {
         if (!dead) {
@@ -105,45 +172,11 @@ public class Enemy extends Thread{
 
         Graphics2D g2 = (Graphics2D) g;
         if (!dead) {
-            if(velx == 0){
-                texture = texture_idle;
-            }
-            if(direction == -1){
-                if(spriteNum < 10){
-                    spriteNum ++;
-                    texture = texture_left1;
-                    if(spriteNum == 10){
-                        spriteNum = 11;
-                    }
-                }else if(spriteNum > 10 && spriteNum < 20){
-                    spriteNum++;
-                    texture = texture_left2;
-                    if(spriteNum == 20){
-                        spriteNum = 0;
-                    }
-                }
-            } else if (direction == 0) {
-                texture = texture_idle;
-            } else if (direction == 1) {
-                if(spriteNum < 10){
-                    spriteNum ++;
-                    texture = texture_right1;
-                    if(spriteNum == 10){
-                        spriteNum = 11;
-                    }
-                }else if(spriteNum > 10 && spriteNum < 20){
-                    spriteNum++;
-                    texture = texture_right2;
-                    if(spriteNum == 20){
-                        spriteNum = 0;
-                    }
-                }
-            } else if (velx == 0) {
-                texture = texture_idle;
-            }
+            Image restexture;
+            restexture = texture.getScaledInstance(98, 48, Image.SCALE_SMOOTH);
             g2.setColor(Color.BLACK);
             g2.draw(hitbox);
-            g2.drawImage(texture, x, y, sizeX, sizeY, null);
+            g2.drawImage(restexture, x, y,98,48, null);
             g2.setColor(Color.RED);
             g2.drawString("Health" + health, x, y);
         }

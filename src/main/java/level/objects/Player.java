@@ -31,7 +31,7 @@ public class Player {       //Gestamte Klasse selber geschrieben
     public int attackDamage_Q = 25;
     public int directionX = 0;
 
-    BufferedImage left1, left2, right1, right2, idle1, idle2;
+    BufferedImage left1, left2, right1, right2, idle1, idle2, PunshRight, PunshLeft;
     BufferedImage player;
     int spriteNum = 1;
 
@@ -193,6 +193,8 @@ public class Player {       //Gestamte Klasse selber geschrieben
              left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/runningLeft2.png")));
              idle1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/Idle1.png")));
              idle2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/Idle2.png")));
+             PunshRight = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/PlayerPunshRight.png")));
+             PunshLeft= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/PlayerPunshLeft.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -211,6 +213,13 @@ public class Player {       //Gestamte Klasse selber geschrieben
 
     }
     public void Attack_Q(){
+        if(directionX == -1){
+            player = PunshLeft;
+        } else if (directionX == 1 || directionX == 0) {
+            player = PunshRight;
+        }
+        lH.sP.setFile(5);
+        lH.sP.Playsound();
         for(int i = 0; i < lH.npcH.enemies.length; i++){
             if(hitboxBody.intersects(lH.npcH.enemies[i].hitbox)){
                 canAttack_Q = false;
@@ -224,6 +233,7 @@ public class Player {       //Gestamte Klasse selber geschrieben
                 }
                 System.out.println(lH.npcH.enemies[i].health);
             }else {
+                canAttack_Q = true;
                 System.out.println("You cannot attack!");
             }
         }
