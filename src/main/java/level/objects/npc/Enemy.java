@@ -30,7 +30,7 @@ public class Enemy extends Thread{
      LevelHandler lH;
     public Rectangle hitboxFeet, hitboxBody;
     int maxDistance;
-    int direction = 0;
+    public int direction = 0;
     int spriteNum = 1;
 
     public Enemy(int x, int y, int sizeX, int sizeY, String texturePath, String texturePath_FLeft1, String texturePath_FLeft2, String texturePath_FRight1, String texturePath_FRight2, LevelHandler lH, int maxDistance) {
@@ -61,6 +61,11 @@ public class Enemy extends Thread{
     public void Attack(Player p){
         if(p.hitboxBody.intersects(hitboxBody)){
             if(p.health != 0){
+                if(p.directionX == -1){
+                    p.player = p.attackedLeft;
+                }else {
+                    p.player = p.attackedRight;
+                }
                 if(direction == -1){
                     texture = attackLeft;
                     try {

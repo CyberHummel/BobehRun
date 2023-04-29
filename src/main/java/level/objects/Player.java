@@ -31,8 +31,8 @@ public class Player {       //Gestamte Klasse selber geschrieben
     public int attackDamage_Q = 25;
     public int directionX = 0;
 
-    BufferedImage left1, left2, right1, right2, idle1, idle2, PunshRight, PunshLeft;
-    BufferedImage player;
+    BufferedImage left1, left2, right1, right2, idle1, idle2, PunshRight, PunshLeft, WildschweinAttackedLeft, WildschweinAttackedRight;
+    public BufferedImage player, attackedLeft, attackedRight;
     int spriteNum = 1;
 
     public Player(Window w, int x, int y, int width, int height, LevelHandler lH) {
@@ -195,6 +195,12 @@ public class Player {       //Gestamte Klasse selber geschrieben
              idle2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/Idle2.png")));
              PunshRight = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/PlayerPunshRight.png")));
              PunshLeft= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/PlayerPunshLeft.png")));
+             WildschweinAttackedLeft = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Wildschwein/WildschweinFacingLeft1Damage.png")));
+             WildschweinAttackedRight = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Wildschwein/WildschweinFacingRight1Attacked.png")));
+             attackedLeft = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/playerAttackedLeft.png")));
+             attackedRight = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/player/playerAttackedRight.png")));
+
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -225,6 +231,11 @@ public class Player {       //Gestamte Klasse selber geschrieben
                 canAttack_Q = false;
                 lH.hud.canPlayerAttack = false;
                 lH.npcH.enemies[i].health -= attackDamage_Q;
+                if(lH.npcH.enemies[i].direction == -1){
+                    lH.npcH.enemies[i].texture = WildschweinAttackedLeft;
+                }else{
+                    lH.npcH.enemies[i].texture = WildschweinAttackedRight;
+                }
                 if(lH.npcH.enemies[i].health <= 0){
                     lH.npcH.enemies[i].dead = true;
                 }
