@@ -13,7 +13,7 @@ public class HUD { //gesamte Klasse selber
     public int Coins;
     LevelHandler lH;
 
-    public boolean canPlayerAttack;
+    public boolean canPlayerAttack = true;
     Font font;
 
     Graphics g;
