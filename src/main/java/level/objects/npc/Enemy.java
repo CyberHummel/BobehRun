@@ -10,13 +10,13 @@ import java.util.Objects;
 
 
 public class Enemy extends Thread{
-    private int x;
+    public int x;
     private int y;
     private final int sizeX;
     private final int sizeY;
     private double vely, velx;
     private final int damage = 10;
-    private final int attackSpeed = 1;
+    private final double attackSpeed = 0.75;
     private final double defendSpeed = 1;
     private final int attackDelay = 2000;
     BufferedImage texture_idle, texture_left1, texture_left2, texture_right1, texture_right2, attackLeft, attackRight;
@@ -28,7 +28,7 @@ public class Enemy extends Thread{
     public final int maxhealth = 100;
     private final Tile_Manager tM;
      LevelHandler lH;
-    public Rectangle hitbox;
+    public Rectangle hitboxFeet, hitboxBody;
     int maxDistance;
     int direction = 0;
     int spriteNum = 1;
@@ -38,7 +38,8 @@ public class Enemy extends Thread{
         this.y = y;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-        hitbox = new Rectangle(x, y, sizeX, sizeY);
+        hitboxFeet = new Rectangle(x+20, y-20, sizeX-20, 20);
+        hitboxBody = new Rectangle(x, y, sizeX+20, sizeY);
         this.lH = lH;
         this.tM = lH.tileM;
         this.maxDistance = maxDistance;
@@ -58,7 +59,7 @@ public class Enemy extends Thread{
     }
 
     public void Attack(Player p){
-        if(p.hitboxBody.intersects(hitbox)){
+        if(p.hitboxBody.intersects(hitboxBody)){
             if(p.health != 0){
                 if(direction == -1){
                     texture = attackLeft;
@@ -93,8 +94,10 @@ public class Enemy extends Thread{
         if(health == 0){
             dead = true;
         }
-        hitbox.x = x;
-        hitbox.y = y;
+        hitboxBody.x = x-5;
+        hitboxBody.y = y+5;
+        hitboxFeet.x = x+10;
+        hitboxFeet.y = y+30;
         if (falling) {
             y += vely;
         }
@@ -102,7 +105,7 @@ public class Enemy extends Thread{
             vely += 0.2;
         }
 
-        if(!hitbox.intersects(lH.player.hitboxBody)){
+        if(!hitboxBody.intersects(lH.player.hitboxBody)){
         switch (direction){
             case 0:{
                 if(spriteNum < 10){
@@ -155,9 +158,9 @@ public class Enemy extends Thread{
         if (!dead) {
             for (int i = 0; i < tM.tiles.length; i++) {
                 if (tM.tiles[i].collission) {
-                    if (hitbox.intersects(tM.tiles[i].hitbox)) {
+                    if (hitboxFeet.intersects(tM.tiles[i].hitbox)) {
                         y = lH.tileM.tiles[i].y - sizeY + 2;
-                        hitbox.y = y;
+                        hitboxFeet.y = y;
                         falling = false;
                     } else {
                         falling = true;
@@ -175,7 +178,8 @@ public class Enemy extends Thread{
             Image restexture;
             restexture = texture.getScaledInstance(98, 48, Image.SCALE_SMOOTH);
             g2.setColor(Color.BLACK);
-            g2.draw(hitbox);
+            g2.draw(hitboxFeet);
+            g2.draw(hitboxBody);
             g2.drawImage(restexture, x, y,98,48, null);
             g2.setColor(Color.RED);
             g2.drawString("Health" + health, x, y);
@@ -191,11 +195,11 @@ public class Enemy extends Thread{
             int Distance = CalculateDistance(p);
             if (health >= maxhealth/2 && x != 0) {
                 if (Distance <= maxDistance) {
-                    if (Distance > 0 && !hitbox.intersects(p.hitboxBody)) {
+                    if (Distance > 0 && !hitboxBody.intersects(p.hitboxBody)) {
                         direction = -1;
                         velx = -attackSpeed;
                         x += velx;
-                    } else if (Distance < 0 && !hitbox.intersects(p.hitboxBody)) {
+                    } else if (Distance < 0 && !hitboxBody.intersects(p.hitboxBody)) {
                         direction = 1;
                         velx = attackSpeed;
                         x += velx;
@@ -204,7 +208,7 @@ public class Enemy extends Thread{
                     texture = texture_idle;
                 }
             }else{
-                if(Distance <= maxDistance && x < lH.w.FrameWidth/2){
+                if(Distance <= maxDistance){
                     if (Distance > 0) {
                         velx = defendSpeed;
                         direction = 1;

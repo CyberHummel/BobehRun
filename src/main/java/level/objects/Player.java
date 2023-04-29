@@ -43,7 +43,7 @@ public class Player {       //Gestamte Klasse selber geschrieben
         this.height = height;
         this.lH = lH;
         hitBoxFeet = new Rectangle(x+(width/8), y+(height-10), width/4, 10);
-        hitboxBody = new Rectangle(x+(width/4), y, width/2, height);
+        hitboxBody = new Rectangle(x+(width/4), y+40, width/2, 60);
         getPlayerSprites();
         player = left1;
         alive = true;
@@ -54,7 +54,7 @@ public class Player {       //Gestamte Klasse selber geschrieben
         hitBoxFeet.x = (int) x+(width/3 + 5);
         hitBoxFeet.y = (int) y+(height-10);
         hitboxBody.x = (int) x+(width/4);
-        hitboxBody.y = (int) y -10;
+        hitboxBody.y = (int) y +20;
 
         for (int i = 0; i < lH.tileM.tiles.length; i++){
             if(lH.tileM.tiles[i].collission){
@@ -221,7 +221,7 @@ public class Player {       //Gestamte Klasse selber geschrieben
         lH.sP.setFile(5);
         lH.sP.Playsound();
         for(int i = 0; i < lH.npcH.enemies.length; i++){
-            if(hitboxBody.intersects(lH.npcH.enemies[i].hitbox)){
+            if(hitboxBody.intersects(lH.npcH.enemies[i].hitboxBody)){
                 canAttack_Q = false;
                 lH.npcH.enemies[i].health -= attackDamage_Q;
                 if(lH.npcH.enemies[i].health <= 0){

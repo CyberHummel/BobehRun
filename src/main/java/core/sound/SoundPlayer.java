@@ -10,7 +10,7 @@ public class SoundPlayer {
     Clip BackroundMusic;
     FloatControl fc;
     public boolean clipCompleted;
-    URL[] soundpaths = new URL[6];
+    URL[] soundpaths = new URL[7];
     public SoundPlayer(){
         soundpaths[0] = getClass().getResource("/main/ressources/sounds/CoinPickupSound.wav");
         soundpaths[1] = getClass().getResource("/main/ressources/sounds/DeathSound.wav");
@@ -18,6 +18,7 @@ public class SoundPlayer {
         soundpaths[3] = getClass().getResource("/main/ressources/sounds/WildschweinDeathSound.wav");
         soundpaths[4] = getClass().getResource("/main/ressources/sounds/BackroundMusic.wav");
         soundpaths[5] = getClass().getResource("/main/ressources/sounds/PunnshSound.wav");
+        soundpaths[6] = getClass().getResource("/main/ressources/sounds/JumpSound.wav");
 
         clipCompleted = false;
     }

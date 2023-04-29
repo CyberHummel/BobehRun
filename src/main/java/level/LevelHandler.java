@@ -69,6 +69,9 @@ public class LevelHandler extends Thread{
         for (int i = 0; i < tileM.tiles.length; i++) {
             tileM.tiles[i].updateTile(speed);
         }
+        for(int i = 0; i < npcH.enemies.length; i++){
+            npcH.enemies[i].x += speed;
+        }
         bM.updateClouds(cloudSpeed);
         bM.updateAbstractBackrounds(abstractBackroundSpeed);
     }

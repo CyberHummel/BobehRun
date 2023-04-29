@@ -40,6 +40,8 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
             w.level.player.directionX = -1;
         } else if (key == KeyEvent.VK_SPACE) {
             if (w.level.player.jumpable) {
+                w.level.sP.setFile(6);
+                w.level.sP.Playsound();
                 w.level.player.y -= 4;
                 w.level.player.hitBoxFeet.y -= 4;
                 w.level.player.y -= 4;
