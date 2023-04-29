@@ -193,7 +193,6 @@ public class Enemy extends Thread{
     }
 
     public void MoveToPlayer(int maxDistance, Player p) {
-        System.out.println(x);
         if (!dead) {
             int Distance = CalculateDistance(p);
             if (health >= maxhealth/2) {

@@ -12,10 +12,12 @@ import java.util.Objects;
 public class HUD { //gesamte Klasse selber
     public int Coins;
     LevelHandler lH;
+
+    public boolean canPlayerAttack;
     Font font;
 
     Graphics g;
-    BufferedImage heart, deadHeart, heartOverlay;
+    BufferedImage heart, deadHeart, heartOverlay, attackIndicator1, attackIndicator2;
     Color transparent = new Color(160, 160, 160, 191);
     Rectangle hud = new Rectangle(0, 25, 100, 60);
 
@@ -30,6 +32,8 @@ public class HUD { //gesamte Klasse selber
             heart = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/HeartIconFull.png")));
             deadHeart = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/HeartIconEmpty.png")));
             heartOverlay = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Overlay Hearts.png")));
+            attackIndicator1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/AttackIndicator_1.png")));
+            attackIndicator2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/AttackIndicator_2.png")));
         } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);
         }
@@ -44,6 +48,7 @@ public class HUD { //gesamte Klasse selber
         g2.setColor(Color.BLACK);
         g2.drawString("COINS:" + Coins, 0, 60);
         HealthBarRender(g2);
+        AttackIndicator(g);
     }
 
     public void HealthBarRender(Graphics2D g2) {
@@ -188,6 +193,15 @@ public class HUD { //gesamte Klasse selber
         g2.fillRect(0,0, w.getWidth(), w.getHeight());
         g2.setColor(Color.RED);
         g2.drawString("You DIED", w.getWidth()/2, w.getHeight()/2);
+    }
+
+    public void AttackIndicator(Graphics g){
+        Graphics2D g2 = (Graphics2D) g;
+        if(canPlayerAttack){
+            g2.drawImage(attackIndicator2,g2.getFontMetrics(font).stringWidth("Coins:") + 24,60-24, 48, 48, null);
+        }else {
+            g2.drawImage(attackIndicator1,g2.getFontMetrics(font).stringWidth("Coins:") + 24,60-24, 48, 48, null);
+        }
     }
 
 

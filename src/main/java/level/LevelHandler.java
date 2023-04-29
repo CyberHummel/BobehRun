@@ -90,6 +90,7 @@ public class LevelHandler extends Thread{
 
 
         hud.Render(g);
+
         if(player.health <= 0){
             hud.DeathScreen(g);
             if(player.alive){

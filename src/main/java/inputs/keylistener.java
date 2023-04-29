@@ -83,6 +83,7 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
                     try {
                         Thread.sleep(w.level.player.attackDelay_Q);
                         System.out.println("You can attack!");
+                        w.level.hud.canPlayerAttack = true;
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }

@@ -223,6 +223,7 @@ public class Player {       //Gestamte Klasse selber geschrieben
         for(int i = 0; i < lH.npcH.enemies.length; i++){
             if(hitboxBody.intersects(lH.npcH.enemies[i].hitboxBody)){
                 canAttack_Q = false;
+                lH.hud.canPlayerAttack = false;
                 lH.npcH.enemies[i].health -= attackDamage_Q;
                 if(lH.npcH.enemies[i].health <= 0){
                     lH.npcH.enemies[i].dead = true;
