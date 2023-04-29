@@ -16,7 +16,7 @@ public class Enemy extends Thread{
     private final int sizeY;
     private double vely, velx;
     private final int damage = 10;
-    private final double attackSpeed = 0.75;
+    private final double attackSpeed = 1;
     private final double defendSpeed = 1;
     private final int attackDelay = 2000;
     BufferedImage texture_idle, texture_left1, texture_left2, texture_right1, texture_right2, attackLeft, attackRight;
@@ -93,6 +93,8 @@ public class Enemy extends Thread{
     public void tick() {
         if(health == 0){
             dead = true;
+        }if(x <= 0){
+            x = 0;
         }
         hitboxBody.x = x-5;
         hitboxBody.y = y+5;
@@ -191,9 +193,10 @@ public class Enemy extends Thread{
     }
 
     public void MoveToPlayer(int maxDistance, Player p) {
+        System.out.println(x);
         if (!dead) {
             int Distance = CalculateDistance(p);
-            if (health >= maxhealth/2 && x != 0) {
+            if (health >= maxhealth/2) {
                 if (Distance <= maxDistance) {
                     if (Distance > 0 && !hitboxBody.intersects(p.hitboxBody)) {
                         direction = -1;
