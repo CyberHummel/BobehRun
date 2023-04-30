@@ -11,16 +11,15 @@ public class AbstractBackround {
     double x, y;
     BufferedImage texture;
     String bigTexturePath = "/main/ressources/textures/Abstract Backround 1.png";
-    public AbstractBackround(int x, int y, int sizeX, int sizeY, int size){
+
+    public AbstractBackround(int x, int y, int sizeX, int sizeY, int size) {
         String Path = "";
         this.startX = x;
         this.x = x;
         this.y = y;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-
-
-        if(size == 0){
+        if (size == 0) {
             Path = bigTexturePath;
         }
         try {
@@ -30,8 +29,8 @@ public class AbstractBackround {
         }
     }
 
-    public void Render(Graphics g){
+    public void Render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(texture, (int)x, (int)y, sizeX, sizeY, null);
+        g2.drawImage(texture, (int) x, (int) y, sizeX, sizeY, null);
     }
 }

@@ -6,7 +6,6 @@ import main.java.level.objects.Player;
 import java.awt.*;
 
 public class Coin extends Item {
-
     public HUD hud;
 
     public Coin(int x, int y, int size, boolean pickedUp, String texturePath, HUD hud) {

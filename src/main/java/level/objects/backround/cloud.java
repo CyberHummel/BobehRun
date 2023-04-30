@@ -9,14 +9,11 @@ import java.util.Objects;
 public class cloud {//alles selber gschrieben
     public double x, y;
     public int size;
-    public  int startX;
+    public int startX;
     public BufferedImage texture;
-
     String cloudSmallPath = "/main/ressources/textures/Cloud_Small.png";
     String cloudBigPath = "/main/ressources/textures/Cloud_Big.png";
-
     int[] Size = new int[2];
-
     String Path;
 
     public cloud(int x, int y, int size, int startX) {
@@ -27,7 +24,7 @@ public class cloud {//alles selber gschrieben
         if (size == 0) {
             Path = cloudSmallPath;
             Size[0] = 192;
-            Size[1] =  96;
+            Size[1] = 96;
         } else if (size == 1) {
             Path = cloudBigPath;
             Size[0] = 348;
@@ -40,13 +37,9 @@ public class cloud {//alles selber gschrieben
         }
     }
 
-    public void Render(Graphics g){
+    public void Render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(texture, (int) x, (int) y, Size[0], Size[1], null);
     }
-
-
-
-
 }
 

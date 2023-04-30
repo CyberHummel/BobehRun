@@ -1,18 +1,18 @@
 package main.java.level.objects.npc;
+
 import main.java.level.LevelHandler;
 import main.java.level.objects.Player;
 import main.java.level.objects.tiles.Tile_Manager;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-
-public class Enemy extends Thread{
+public class Enemy extends Thread {
     public int x;
     private int y;
-    private final int sizeX;
     private final int sizeY;
     private double vely, velx;
     private final int damage = 10;
@@ -23,11 +23,10 @@ public class Enemy extends Thread{
     public BufferedImage texture;
     public boolean dead = false;
     private boolean falling;
-
     public int health = 100;
     public final int maxhealth = 100;
     private final Tile_Manager tM;
-     LevelHandler lH;
+    LevelHandler lH;
     public Rectangle hitboxFeet, hitboxBody;
     int maxDistance;
     public int direction = 0;
@@ -36,14 +35,12 @@ public class Enemy extends Thread{
     public Enemy(int x, int y, int sizeX, int sizeY, String texturePath, String texturePath_FLeft1, String texturePath_FLeft2, String texturePath_FRight1, String texturePath_FRight2, LevelHandler lH, int maxDistance) {
         this.x = x;
         this.y = y;
-        this.sizeX = sizeX;
         this.sizeY = sizeY;
-        hitboxFeet = new Rectangle(x+20, y-20, sizeX-20, 20);
-        hitboxBody = new Rectangle(x, y, sizeX+20, sizeY);
+        hitboxFeet = new Rectangle(x + 20, y - 20, sizeX - 20, 20);
+        hitboxBody = new Rectangle(x, y, sizeX + 20, sizeY);
         this.lH = lH;
         this.tM = lH.tileM;
         this.maxDistance = maxDistance;
-
         try {
             texture = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath)));
             texture_idle = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath)));
@@ -58,10 +55,10 @@ public class Enemy extends Thread{
         }
     }
 
-    public void Attack(Player p){
-        if(p.hitboxBody.intersects(hitboxBody)){
-            if(p.health != 0){
-                if(p.directionX == -1){
+    public void Attack(Player p) {
+        if (p.hitboxBody.intersects(hitboxBody)) {
+            if (p.health != 0) {
+                if (p.directionX == -1) {
                     p.player = p.attackedLeft;
                     try {
                         Thread.sleep(10);
@@ -69,7 +66,7 @@ public class Enemy extends Thread{
                         throw new RuntimeException(e);
                     }
                     p.player = p.attackedLeft;
-                }else {
+                } else {
                     p.player = p.attackedRight;
                     try {
                         Thread.sleep(10);
@@ -78,7 +75,7 @@ public class Enemy extends Thread{
                     }
                     p.player = p.attackedRight;
                 }
-                if(direction == -1){
+                if (direction == -1) {
                     texture = attackLeft;
                     try {
                         Thread.sleep(100);
@@ -86,7 +83,7 @@ public class Enemy extends Thread{
                         throw new RuntimeException(e);
                     }
                     texture = texture_left1;
-                }else if(direction == 1){
+                } else if (direction == 1) {
                     texture = attackRight;
                     try {
                         Thread.sleep(100);
@@ -95,28 +92,29 @@ public class Enemy extends Thread{
                     }
                     texture = texture_right1;
                 }
-            p.health -= damage;
-            lH.sP.setFile(2);
-            lH.sP.Playsound();
-            if(p.health <= 0){
-                p.alive = false;
-                lH.sP.setFile(1);
+                p.health -= damage;
+                lH.sP.setFile(2);
                 lH.sP.Playsound();
+                if (p.health <= 0) {
+                    p.alive = false;
+                    lH.sP.setFile(1);
+                    lH.sP.Playsound();
+                }
             }
-        }
         }
     }
 
     public void tick() {
-        if(health == 0){
+        if (health == 0) {
             dead = true;
-        }if(x <= 0){
+        }
+        if (x <= 0) {
             x = 0;
         }
-        hitboxBody.x = x-5;
-        hitboxBody.y = y+5;
-        hitboxFeet.x = x+10;
-        hitboxFeet.y = y+30;
+        hitboxBody.x = x - 5;
+        hitboxBody.y = y + 5;
+        hitboxFeet.x = x + 10;
+        hitboxFeet.y = y + 30;
         if (falling) {
             y += vely;
         }
@@ -124,55 +122,51 @@ public class Enemy extends Thread{
             vely += 0.2;
         }
 
-        if(!hitboxBody.intersects(lH.player.hitboxBody)){
-        switch (direction){
-            case 0:{
-                if(spriteNum < 10){
-                    spriteNum ++;
-                    texture = texture_idle;
-                    if(spriteNum == 10){
-                        spriteNum = 11;
+        if (!hitboxBody.intersects(lH.player.hitboxBody)) {
+            switch (direction) {
+                case 0 -> {
+                    if (spriteNum < 10) {
+                        spriteNum++;
+                        texture = texture_idle;
+                        if (spriteNum == 10) {
+                            spriteNum = 11;
+                        }
                     }
                 }
-                break;
-            }
-            case -1:{
-                if(spriteNum < 10){
-                    spriteNum ++;
-                    texture = texture_left1;
-                    if(spriteNum == 10){
-                        spriteNum = 11;
-                    }
-                }else if(spriteNum > 10 && spriteNum < 20){
-                    spriteNum++;
-                    texture = texture_left2;
-                    if(spriteNum == 20){
-                        spriteNum = 0;
-                    }
-                }
-                break;
-            }
-
-
-            case 1:{
-                if(spriteNum < 10){
-                    spriteNum ++;
-                    texture = texture_right1;
-                    if(spriteNum == 10){
-                        spriteNum = 11;
-                    }
-                }else if(spriteNum > 10 && spriteNum < 20){
-                    spriteNum++;
-                    texture = texture_right2;
-                    if(spriteNum == 20){
-                        spriteNum = 0;
+                case -1 -> {
+                    if (spriteNum < 10) {
+                        spriteNum++;
+                        texture = texture_left1;
+                        if (spriteNum == 10) {
+                            spriteNum = 11;
+                        }
+                    } else if (spriteNum > 10 && spriteNum < 20) {
+                        spriteNum++;
+                        texture = texture_left2;
+                        if (spriteNum == 20) {
+                            spriteNum = 0;
+                        }
                     }
                 }
-                break;
+                case 1 -> {
+                    if (spriteNum < 10) {
+                        spriteNum++;
+                        texture = texture_right1;
+                        if (spriteNum == 10) {
+                            spriteNum = 11;
+                        }
+                    } else if (spriteNum > 10 && spriteNum < 20) {
+                        spriteNum++;
+                        texture = texture_right2;
+                        if (spriteNum == 20) {
+                            spriteNum = 0;
+                        }
+                    }
+                }
             }
-        }
         }
     }
+
     public void Colission() {
         if (!dead) {
             for (int i = 0; i < tM.tiles.length; i++) {
@@ -199,7 +193,7 @@ public class Enemy extends Thread{
             g2.setColor(Color.BLACK);
             g2.draw(hitboxFeet);
             g2.draw(hitboxBody);
-            g2.drawImage(restexture, x, y,98,48, null);
+            g2.drawImage(restexture, x, y, 98, 48, null);
             g2.setColor(Color.RED);
             g2.drawString("Health" + health, x, y);
         }
@@ -212,7 +206,7 @@ public class Enemy extends Thread{
     public void MoveToPlayer(int maxDistance, Player p) {
         if (!dead) {
             int Distance = CalculateDistance(p);
-            if (health >= maxhealth/2) {
+            if (health >= maxhealth / 2) {
                 if (Distance <= maxDistance) {
                     if (Distance > 0 && !hitboxBody.intersects(p.hitboxBody)) {
                         direction = -1;
@@ -223,11 +217,11 @@ public class Enemy extends Thread{
                         velx = attackSpeed;
                         x += velx;
                     }
-                }else {
+                } else {
                     texture = texture_idle;
                 }
-            }else{
-                if(Distance <= maxDistance){
+            } else {
+                if (Distance <= maxDistance) {
                     if (Distance > 0) {
                         velx = defendSpeed;
                         direction = 1;
@@ -241,8 +235,9 @@ public class Enemy extends Thread{
             }
         }
     }
-    public void run(){
-        while (health != 0 && lH.player.health != 0){
+
+    public void run() {
+        while (health != 0 && lH.player.health != 0) {
             Attack(lH.player);
             try {
                 Thread.sleep(attackDelay);
@@ -251,5 +246,4 @@ public class Enemy extends Thread{
             }
         }
     }
-
 }

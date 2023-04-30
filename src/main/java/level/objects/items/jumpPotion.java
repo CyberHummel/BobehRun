@@ -5,7 +5,6 @@ import main.java.level.objects.Player;
 import java.awt.*;
 
 public class jumpPotion extends Item {
-
     public jumpPotion(int x, int y, int size, boolean pickedUp, String texturePath) {
         super(x, y, size, pickedUp, texturePath);
     }
@@ -28,6 +27,5 @@ public class jumpPotion extends Item {
     public void pickUp(Player p) {
         pickedUp = true;
         p.JumpVelocity = 8;
-        //EFFECT
     }
 }

@@ -14,15 +14,12 @@ public class HUD { //gesamte Klasse selber
     public Rectangle Exit;
     LevelHandler lH;
     public boolean restarted = false;
-
     public boolean canPlayerAttack = true;
     Font font;
-
     Graphics g;
     BufferedImage heart, deadHeart, heartOverlay, attackIndicator1, attackIndicator2;
     Color transparent = new Color(160, 160, 160, 191);
     Rectangle hud = new Rectangle(0, 25, 100, 60);
-
     Window w;
 
     public HUD(LevelHandler lH, Window w) {
@@ -189,29 +186,27 @@ public class HUD { //gesamte Klasse selber
         }
     }
 
-    public void DeathScreen(Graphics g){
+    public void DeathScreen(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.BLACK);
-        g2.fillRect(0,0, w.getWidth(), w.getHeight());
+        g2.fillRect(0, 0, w.getWidth(), w.getHeight());
         g2.setColor(Color.RED);
-        g2.drawString("You DIED", w.getWidth()/2-g.getFontMetrics(font).stringWidth("You DIED")/2, w.getHeight()/2);
-        Exit = new Rectangle((w.FrameWidth/2)-100, (w.FrameHeight/2)-50, 200, 100);
-        Exit.x = (w.FrameWidth/2)-100;
-        Exit.y = (w.FrameHeight/2)-100;
+        g2.drawString("You DIED", w.getWidth() / 2 - g.getFontMetrics(font).stringWidth("You DIED") / 2, w.getHeight() / 2);
+        Exit = new Rectangle((w.FrameWidth / 2) - 100, (w.FrameHeight / 2) - 50, 200, 100);
+        Exit.x = (w.FrameWidth / 2) - 100;
+        Exit.y = (w.FrameHeight / 2) - 100;
         g2.setColor(Color.RED);
         g2.fill(Exit);
         g2.setColor(Color.WHITE);
-        g2.drawString("Exit", w.getWidth()/2-g.getFontMetrics(font).stringWidth("Exit")/2 , (w.getHeight()/2)+50);
+        g2.drawString("Exit", w.getWidth() / 2 - g.getFontMetrics(font).stringWidth("Exit") / 2, (w.getHeight() / 2) + 50);
     }
 
-    public void AttackIndicator(Graphics g){
+    public void AttackIndicator(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        if(canPlayerAttack){
-            g2.drawImage(attackIndicator2, (int) lH.player.x+(48/2), (int) (lH.player.y-(lH.player.height/3)), 48, 48, null);
-        }else {
-            g2.drawImage(attackIndicator1, (int) lH.player.x+(48/2), (int) (lH.player.y-(lH.player.height/3)), 48, 48, null);
+        if (canPlayerAttack) {
+            g2.drawImage(attackIndicator2, (int) lH.player.x + (48 / 2), (int) (lH.player.y - (lH.player.height / 3)), 48, 48, null);
+        } else {
+            g2.drawImage(attackIndicator1, (int) lH.player.x + (48 / 2), (int) (lH.player.y - (lH.player.height / 3)), 48, 48, null);
         }
     }
-
-
 }

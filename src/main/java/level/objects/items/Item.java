@@ -8,13 +8,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-
 public abstract class Item {    //alles selber gschrieben :D
     public int x, y, size;
     public boolean pickedUp = false;
-
     public Rectangle hitbox = new Rectangle();
-
     public BufferedImage image;
 
     public Item(int x, int y, int size, boolean pickedUp, String texturePath) {
@@ -32,9 +29,7 @@ public abstract class Item {    //alles selber gschrieben :D
         }
     }
 
-
     public abstract void Render(Graphics g);
-
 
     public abstract void updateCoords(int speed);
 

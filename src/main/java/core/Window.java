@@ -16,7 +16,6 @@ import java.util.Objects;
 //gesamte Classe seber
 
 public class Window extends Canvas implements Runnable {
-
     public BufferStrategy bs;
     @Serial
     private static final long serialVersionUID = 1L;
@@ -24,14 +23,11 @@ public class Window extends Canvas implements Runnable {
     private boolean running = false;
     public final keylistener Keylistener = new keylistener(this);
     public final MouseListener MouseListener = new MouseListener(this);
-
     public int FrameWidth, FrameHeight;
     public int FPS;
     public MainMenu mM = new MainMenu(this);
     BufferedImage icon;
-
     public LevelHandler level = new LevelHandler(this);
-
 
     public Window(String Title, int Width, int Heigth) throws IOException {
         JFrame frame = new JFrame(Title);
@@ -45,13 +41,11 @@ public class Window extends Canvas implements Runnable {
         frame.setIconImage(icon);
         frame.add(this);
         frame.setBackground(Color.white);
-        frame.setLocation(1,1);
-        frame.setSize(Width +1, Heigth);
+        frame.setLocation(1, 1);
+        frame.setSize(Width + 1, Heigth);
         Keylistener.start();
         level.start();
-
     }
-
 
     public void start() {
         thread = new Thread(this);
@@ -69,21 +63,16 @@ public class Window extends Canvas implements Runnable {
     }
 
     public void Render() {
-         bs = this.getBufferStrategy();
-
+        bs = this.getBufferStrategy();
         if (bs == null) {
             this.createBufferStrategy(2);
             bs = this.getBufferStrategy();
         }
         Graphics g = bs.getDrawGraphics();
-
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.BLACK);
         g2.fillRect(0, 0, this.getWidth(), this.getHeight());
-
-
         level.Run(g);
-
         bs.show();
         g2.dispose();
     }
@@ -94,7 +83,6 @@ public class Window extends Canvas implements Runnable {
 
     @Override
     public void run() {
-
         long lasTime = System.nanoTime();
         double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
@@ -103,7 +91,6 @@ public class Window extends Canvas implements Runnable {
         int updates = 0;
         int frames = 0;
 
-
         while (running) {
             long now = System.nanoTime();
             delta += (now - lasTime) / ns;
@@ -111,19 +98,14 @@ public class Window extends Canvas implements Runnable {
             while (delta >= 1) {
                 Render();
                 tick();
-                //
-
                 updates++;
                 delta--;
             }
 
-
-
             frames++;
-
-            if (System.currentTimeMillis() - timer > 1000) {           //nicht selber
+            if (System.currentTimeMillis() - timer > 1000) {//nicht selber
                 timer += 1000;
-                frames = frames /1000000;
+                frames = frames / 1000000;
                 System.out.println("FPS:" + frames + "M" + "Ticks:" + updates);
                 FPS = frames;
                 //DUI.updateLabels(FPS);
@@ -131,8 +113,6 @@ public class Window extends Canvas implements Runnable {
                 updates = 0;
             }
         }
-
         stop();
     }
-
 }

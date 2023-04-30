@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.net.URL;
 
 public class SoundPlayer {
-
     Clip clip;
     Clip BackroundMusic;
     FloatControl fc;
     public boolean clipCompleted;
     URL[] soundpaths = new URL[7];
-    public SoundPlayer(){
+
+    public SoundPlayer() {
         soundpaths[0] = getClass().getResource("/main/ressources/sounds/CoinPickupSound.wav");
         soundpaths[1] = getClass().getResource("/main/ressources/sounds/DeathSound.wav");
         soundpaths[2] = getClass().getResource("/main/ressources/sounds/ooh.wav");
@@ -19,11 +19,10 @@ public class SoundPlayer {
         soundpaths[4] = getClass().getResource("/main/ressources/sounds/BackroundMusic.wav");
         soundpaths[5] = getClass().getResource("/main/ressources/sounds/PunnshSound.wav");
         soundpaths[6] = getClass().getResource("/main/ressources/sounds/JumpSound.wav");
-
         clipCompleted = false;
     }
 
-    public void setFile(int i){
+    public void setFile(int i) {
         try {
             AudioInputStream ais = AudioSystem.getAudioInputStream(soundpaths[i]);
             clip = AudioSystem.getClip();
@@ -32,17 +31,18 @@ public class SoundPlayer {
             throw new RuntimeException(e);
         }
     }
-    public void Playsound(){
+
+    public void Playsound() {
         clipCompleted = false;
         clip.start();
-        while (clip.isActive()){
-            if(!clip.isActive()){
+        while (clip.isActive()) {
+            if (!clip.isActive()) {
                 clipCompleted = true;
             }
         }
     }
 
-    public void PlayBackround(){
+    public void PlayBackround() {
         try {
             AudioInputStream ais2 = AudioSystem.getAudioInputStream(soundpaths[4]);
             BackroundMusic = AudioSystem.getClip();
@@ -52,7 +52,6 @@ public class SoundPlayer {
         }
         fc = (FloatControl) BackroundMusic.getControl(FloatControl.Type.MASTER_GAIN);
         fc.setValue(6);
-
         BackroundMusic.loop(Clip.LOOP_CONTINUOUSLY);
     }
 }

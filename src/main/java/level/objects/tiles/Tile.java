@@ -8,14 +8,11 @@ import java.awt.image.BufferedImage;
 public class Tile {     //selber geschrieben
     public BufferedImage image;
     public boolean collission = false;
-
     LevelHandler lH;
-
     public int x;
     public int y;
     public int tileSize;
     public Rectangle hitbox = new Rectangle();
-
 
     public Tile(int x, int y, int tileSize, int HitboxSize, LevelHandler lh) {
         this.lH = lh;
@@ -33,10 +30,8 @@ public class Tile {     //selber geschrieben
         g2.drawImage(image, x, y, tileSize, tileSize, null);
     }
 
-
     public void updateTile(int speed) {
         hitbox.x += speed;
         x += speed;
     }
-
 }

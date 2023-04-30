@@ -15,9 +15,8 @@ public class Item_Manager { // gesamte Klasse selber
     }
 
     public void Render(Graphics g) {
-        for (int i = 0; i < items.length; i++) {
-            items[i].Render(g);
+        for (Item item : items) {
+            item.Render(g);
         }
     }
-
 }

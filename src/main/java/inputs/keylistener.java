@@ -5,10 +5,11 @@ import main.java.core.Window;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class keylistener extends Thread implements KeyListener {       //gesamte Klasse selber
+public class keylistener extends Thread implements KeyListener {//gesamte Klasse selber
     private final Window w;
     public boolean Moving = false;
     volatile int key;
+    public boolean MovingLeft = false;
 
     public keylistener(Window w) {
         this.w = w;
@@ -19,15 +20,10 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
         key = e.getKeyCode();
     }
 
-    public boolean MovingLeft = false;
-
     public void keyPressed(KeyEvent e) {
         Moving = true;
-        //System.out.println(Moving);
-        //System.out.println(MovingLeft);
         int key = e.getKeyCode();
         this.key = key;
-
         if (key == KeyEvent.VK_D) {
             Moving = true;
             w.level.player.velx = w.level.player.speed;
@@ -52,7 +48,6 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
         }
     }
 
-
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
         if (key == KeyEvent.VK_D && !MovingLeft) {
@@ -60,26 +55,23 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
             w.level.player.velx = 0;
             w.level.player.directionX = 0;
         }
-
         if (key == KeyEvent.VK_A && MovingLeft) {
             Moving = false;
             w.level.player.velx = 0;
             w.level.player.directionX = 0;
         }
-
         if (key == KeyEvent.VK_SPACE) {
             w.level.player.jumping = false;
             w.level.player.falling = true;
         }
-
     }
 
-    public void run(){
-        while (w.level.player.alive){// speichere den aktuellen Wert von key
-            if(key == KeyEvent.VK_Q){ // überprüfe den gespeicherten Wert von key
+    public void run() {
+        while (w.level.player.alive) {// speichere den aktuellen Wert von key
+            if (key == KeyEvent.VK_Q) { // überprüfe den gespeicherten Wert von key
                 System.out.println("s");
                 w.level.player.Attack_Q();
-                if(!w.level.player.canAttack_Q){
+                if (!w.level.player.canAttack_Q) {
                     try {
                         Thread.sleep(w.level.player.attackDelay_Q);
                         System.out.println("You can attack!");
@@ -88,7 +80,6 @@ public class keylistener extends Thread implements KeyListener {       //gesamte
                         throw new RuntimeException(e);
                     }
                 }
-
             }
         }
     }

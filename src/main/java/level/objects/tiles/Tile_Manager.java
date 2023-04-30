@@ -9,14 +9,10 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Objects;
 
-
 public class Tile_Manager { //alles selber bis auf readlevelData()
-
     LevelHandler lH;
     public Tile[] tiles;
-
     int tileSize;
-
     int maxCols;
     int maxRows;
     public BufferedImage tileAirImage;
@@ -26,8 +22,6 @@ public class Tile_Manager { //alles selber bis auf readlevelData()
     public BufferedImage tileGrassRightImage;
     public BufferedImage tileGrassTopLeftImage;
     public BufferedImage tileGrassTopRightImage;
-
-
     int[][] mapTileNum;
 
     public Tile_Manager(LevelHandler lH, int maxCols, int maxRows, int tileSize) {
@@ -35,29 +29,18 @@ public class Tile_Manager { //alles selber bis auf readlevelData()
         this.tileSize = tileSize;
         this.maxCols = maxCols;
         this.maxRows = maxRows;
-
         tiles = new Tile[maxCols * maxRows];
-
         mapTileNum = new int[maxCols][maxRows];
-
-
     }
 
     public void getImages() {
         try {
             tileAirImage = ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Air.png"))));
-
             tileGrassImage = ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Grass_Top.png"))));
-
             tileDirtImage = ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Dirt.png"))));
-
-
             tileGrassLeftImage = ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Grass_Left.png"))));
-
             tileGrassRightImage = ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Grass_Right.png"))));
-
             tileGrassTopLeftImage = ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Grass_TopLeft.png"))));
-
             tileGrassTopRightImage = ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Grass_TopRight.png"))));
         } catch (IOException e) {
             e.printStackTrace();
@@ -69,24 +52,18 @@ public class Tile_Manager { //alles selber bis auf readlevelData()
         try {
             File file = new File(Objects.requireNonNull(getClass().getResource(path)).getPath());
             BufferedReader br = new BufferedReader(new FileReader(file));
-
             int col = 0;
             int row = 0;
-
             while (col < maxCols && row < maxRows) {
                 String line = br.readLine();
 
                 while (col < maxCols) {
                     String[] numbers = line.split(" ");
-
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
-
                     col++;
-
                 }
                 if (col == maxCols) {
-
                     col = 0;
                     row++;
                 }
@@ -97,18 +74,15 @@ public class Tile_Manager { //alles selber bis auf readlevelData()
 
         } catch (Exception e) {
             System.out.println("ERROR could not read file");
-
         }
     }
 
     public void buildLevel() {
-
         int col = 0;
         int row = 0;
         int x = 0;
         int y = 0;
         int currentTile = 0;
-
         while (col < maxCols && row < maxRows) {
 
             if (currentTile < maxCols * maxRows) {
@@ -119,7 +93,6 @@ public class Tile_Manager { //alles selber bis auf readlevelData()
                 if (tileCurrentNum == 0) {
                     tiles[currentTile].image = tileAirImage;
                     tiles[currentTile].collission = false;
-
                 } else if (tileCurrentNum == 1) {
                     tiles[currentTile].image = tileGrassImage;
                     tiles[currentTile].collission = true;
@@ -139,13 +112,9 @@ public class Tile_Manager { //alles selber bis auf readlevelData()
                     tiles[currentTile].image = tileGrassTopRightImage;
                     tiles[currentTile].collission = true;
                 }
-
                 currentTile++;
-
                 col++;
-
                 x += tileSize;
-
                 if (col == maxCols) {
                     col = 0;
                     x = 0;
@@ -158,19 +127,17 @@ public class Tile_Manager { //alles selber bis auf readlevelData()
 
     public void RenderNonAir(Graphics g) {
         for (int i = 0; i < tiles.length; i++) {
-            if(tiles[i].collission){
+            if (tiles[i].collission) {
                 tiles[i].Render(g);
             }
         }
     }
 
-    public void RenderAir(Graphics g){
+    public void RenderAir(Graphics g) {
         for (int i = 0; i < tiles.length; i++) {
-            if(!tiles[i].collission){
+            if (!tiles[i].collission) {
                 tiles[i].Render(g);
             }
         }
     }
-
-
 }

@@ -6,44 +6,44 @@ import main.java.level.objects.Player;
 import java.awt.*;
 
 public class NpcHandler {
-
     public Enemy[] enemies;
     protected LevelHandler lH;
-
     Player p;
-    public NpcHandler(int amountEnemies, LevelHandler lH, Player p){
+
+    public NpcHandler(int amountEnemies, LevelHandler lH, Player p) {
         enemies = new Enemy[amountEnemies];
         this.lH = lH;
         this.p = p;
     }
 
-    public void SpawnNpcs(Graphics2D g){
-        enemies[0] = new Enemy(400,400, 96, 48, "/main/ressources/textures/Wildschwein/WildschweinIdle.png","/main/ressources/textures/Wildschwein/WildschweinFacingLeft1.png","/main/ressources/textures/Wildschwein/WildschweinFacingLeft2.png","/main/ressources/textures/Wildschwein/WildschweinFacingRight1.png","/main/ressources/textures/Wildschwein/WildschweinFacingRight2.png", lH, 200);
+    public void SpawnNpcs(Graphics2D g) {
+        enemies[0] = new Enemy(400, 400, 96, 48, "/main/ressources/textures/Wildschwein/WildschweinIdle.png", "/main/ressources/textures/Wildschwein/WildschweinFacingLeft1.png", "/main/ressources/textures/Wildschwein/WildschweinFacingLeft2.png", "/main/ressources/textures/Wildschwein/WildschweinFacingRight1.png", "/main/ressources/textures/Wildschwein/WildschweinFacingRight2.png", lH, 200);
     }
 
-    public void Render(Graphics g){
-        for(int i = 0; i < enemies.length; i++){
-            enemies[i].Render(g);
+    public void Render(Graphics g) {
+        for (Enemy enemy : enemies) {
+            enemy.Render(g);
         }
     }
-    public void tickOn(){
-        for(int i = 0; i < enemies.length; i ++){
+
+    public void tickOn() {
+        for (int i = 0; i < enemies.length; i++) {
             enemies[i].start();
             System.out.println("start!");
         }
     }
 
-    public void tick(){
-        for(int i = 0; i < enemies.length; i ++){
-            enemies[i].tick();
-            enemies[i].MoveToPlayer(200, lH.player);
+    public void tick() {
+        for (Enemy enemy : enemies) {
+            enemy.tick();
+            enemy.MoveToPlayer(200, lH.player);
         }
     }
 
 
-    public void Colission(){
-        for(int i = 0; i < enemies.length; i ++){
-            enemies[i].Colission();
+    public void Colission() {
+        for (Enemy enemy : enemies) {
+            enemy.Colission();
         }
     }
 }
