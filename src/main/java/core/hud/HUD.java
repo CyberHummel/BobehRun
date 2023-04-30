@@ -11,7 +11,9 @@ import java.util.Objects;
 
 public class HUD { //gesamte Klasse selber
     public int Coins;
+    public Rectangle Exit;
     LevelHandler lH;
+    public boolean restarted = false;
 
     public boolean canPlayerAttack = true;
     Font font;
@@ -192,7 +194,14 @@ public class HUD { //gesamte Klasse selber
         g2.setColor(Color.BLACK);
         g2.fillRect(0,0, w.getWidth(), w.getHeight());
         g2.setColor(Color.RED);
-        g2.drawString("You DIED", w.getWidth()/2, w.getHeight()/2);
+        g2.drawString("You DIED", w.getWidth()/2-g.getFontMetrics(font).stringWidth("You DIED")/2, w.getHeight()/2);
+        Exit = new Rectangle((w.FrameWidth/2)-100, (w.FrameHeight/2)-50, 200, 100);
+        Exit.x = (w.FrameWidth/2)-100;
+        Exit.y = (w.FrameHeight/2)-100;
+        g2.setColor(Color.RED);
+        g2.fill(Exit);
+        g2.setColor(Color.WHITE);
+        g2.drawString("Exit", w.getWidth()/2-g.getFontMetrics(font).stringWidth("Exit")/2 , (w.getHeight()/2)+50);
     }
 
     public void AttackIndicator(Graphics g){

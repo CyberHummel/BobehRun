@@ -6,7 +6,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
-import java.util.jar.Attributes;
 
 public class MainMenu { //gesamte Klasse selber
 
@@ -61,8 +60,6 @@ public class MainMenu { //gesamte Klasse selber
 
         g2.drawImage(Space_Key, (int) ((w.FrameWidth/2)-(96*1.5)), (w.FrameHeight/2)-370, 288, 96*4, null);
         g2.drawString("JUMP", (w.FrameWidth / 2) - (g.getFontMetrics(font).stringWidth("START") /2), (w.FrameHeight /2) -70);
-
-        
         }
     }
 
