@@ -10,10 +10,11 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class HUD { //gesamte Klasse selber
-    public int Coins;
+    public int Coins = 10;
     public Rectangle Exit;
     LevelHandler lH;
     public boolean restarted = false;
+    public boolean won = false;
     public boolean canPlayerAttack = true;
     Font font;
     Graphics g;
@@ -48,6 +49,9 @@ public class HUD { //gesamte Klasse selber
         g2.drawString("COINS:" + Coins, 0, 60);
         HealthBarRender(g2);
         AttackIndicator(g);
+        if (Coins == 10) {
+            WinScreen(g);
+        }
     }
 
     public void HealthBarRender(Graphics2D g2) {
@@ -199,6 +203,25 @@ public class HUD { //gesamte Klasse selber
         g2.fill(Exit);
         g2.setColor(Color.WHITE);
         g2.drawString("Exit", w.getWidth() / 2 - g.getFontMetrics(font).stringWidth("Exit") / 2, (w.getHeight() / 2) + 50);
+    }
+
+    public void WinScreen(Graphics g) {
+        if (Coins == 10) {
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setColor(Color.WHITE);
+            g2.fillRect(0, 0, w.getWidth(), w.getHeight());
+            g2.setColor(Color.BLACK);
+            font.deriveFont(10);
+            g2.setFont(font);
+            g2.drawString("You Won with 10 Golden Coins, Congrats!", w.getWidth() / 2 - g.getFontMetrics(font).stringWidth("You Won with 10 Golden Coins, Congrats!") / 2, 50);
+            Exit = new Rectangle((w.FrameWidth / 2) - 100, (w.FrameHeight / 2) - 50, 200, 100);
+            Exit.x = (w.FrameWidth / 2) - 100;
+            Exit.y = (w.FrameHeight / 2) - 100;
+            g2.setColor(Color.YELLOW);
+            g2.fill(Exit);
+            g2.setColor(Color.BLACK);
+            g2.drawString("Exit", w.getWidth() / 2 - g.getFontMetrics(font).stringWidth("Exit") / 2, (w.getHeight() / 2) + 50);
+        }
     }
 
     public void AttackIndicator(Graphics g) {

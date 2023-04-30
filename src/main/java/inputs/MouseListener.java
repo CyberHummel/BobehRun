@@ -38,6 +38,11 @@ public class MouseListener implements java.awt.event.MouseListener { //alles sel
                 w.level.hud.restarted = true;
                 System.exit(0);
             }
+        } else if (!w.level.hud.restarted && w.level.hud.Coins == 10) {
+            if (w.level.hud.Exit.contains(MouseInfo.getPointerInfo().getLocation())) {
+                w.level.hud.restarted = true;
+                System.exit(0);
+            }
         }
     }
 
