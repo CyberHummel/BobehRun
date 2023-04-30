@@ -63,7 +63,19 @@ public class Enemy extends Thread{
             if(p.health != 0){
                 if(p.directionX == -1){
                     p.player = p.attackedLeft;
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    p.player = p.attackedLeft;
                 }else {
+                    p.player = p.attackedRight;
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     p.player = p.attackedRight;
                 }
                 if(direction == -1){

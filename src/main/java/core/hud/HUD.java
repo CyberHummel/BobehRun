@@ -198,9 +198,9 @@ public class HUD { //gesamte Klasse selber
     public void AttackIndicator(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
         if(canPlayerAttack){
-            g2.drawImage(attackIndicator2,g2.getFontMetrics(font).stringWidth("Coins:") + 24,60-24, 48, 48, null);
+            g2.drawImage(attackIndicator2, (int) lH.player.x+(48/2), (int) (lH.player.y-(lH.player.height/3)), 48, 48, null);
         }else {
-            g2.drawImage(attackIndicator1,g2.getFontMetrics(font).stringWidth("Coins:") + 24,60-24, 48, 48, null);
+            g2.drawImage(attackIndicator1, (int) lH.player.x+(48/2), (int) (lH.player.y-(lH.player.height/3)), 48, 48, null);
         }
     }
 
