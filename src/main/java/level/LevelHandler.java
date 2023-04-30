@@ -19,7 +19,7 @@ public class LevelHandler extends Thread {
     boolean inited = false;
     public double Gravity = 4;
     public Player player;
-    public Tile_Manager tileM = new Tile_Manager(this, 64, 22, 48);
+    public Tile_Manager tileM = new Tile_Manager(this, 128, 22, 48);
     public Item_Manager itemM = new Item_Manager();
     public BackroundHandler bM = new BackroundHandler(this);
     public HUD hud;
@@ -47,7 +47,7 @@ public class LevelHandler extends Thread {
         itemM.loadItems(this);
 
         System.out.println(g);
-        bM.Build(2, 1);
+        bM.Build(7, 2);
 
         sP.setFile(0);
         sP.Playsound();

@@ -15,10 +15,19 @@ public class BackroundHandler {//alles selber geschrieben
 
     public void Build(int amountClouds, int amountAbstractBackrounds) {
         clouds = new cloud[amountClouds];
-        clouds[0] = new cloud(100, 200, 0, 100);
-        clouds[1] = new cloud(400, 200, 1, 400);
+        clouds[0] = new cloud(100, 500, 1, 100);
+        clouds[1] = new cloud(800, 300, 1, 800);
+        clouds[2] = new cloud(1200, 400, 1, 1200);
+        clouds[3] = new cloud(1700, 300, 1, 1700);
+
+        clouds[4] = new cloud(400, 200, 0, 400);
+        clouds[5] = new cloud(1000, 100, 0, 400);
+        clouds[6] = new cloud(1500, 140, 0, 400);
+
         abstractBackrounds = new AbstractBackround[amountAbstractBackrounds];
-        abstractBackrounds[0] = new AbstractBackround(0, 200, 385, 301, 0);
+        abstractBackrounds[0] = new AbstractBackround(900, 700, 385, 301, 0);
+        abstractBackrounds[1] = new AbstractBackround(0, 400, 800, 853, 1);
+        //TODO better level
     }
 
     public void updateClouds(double speed) {

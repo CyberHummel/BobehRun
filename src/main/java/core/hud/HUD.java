@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class HUD { //gesamte Klasse selber
-    public int Coins = 10;
+    public int Coins = 0;
     public Rectangle Exit;
     LevelHandler lH;
     public boolean restarted = false;

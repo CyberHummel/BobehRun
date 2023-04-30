@@ -10,8 +10,8 @@ public class AbstractBackround {
     int sizeX, sizeY, startX;
     double x, y;
     BufferedImage texture;
-    String bigTexturePath = "/main/ressources/textures/Abstract Backround 1.png";
-
+    String smallTexturePath = "/main/ressources/textures/Abstract Backround 1.png";
+    String bigTexturePath = "/main/ressources/textures/AbstractBackround2.png";
     public AbstractBackround(int x, int y, int sizeX, int sizeY, int size) {
         String Path = "";
         this.startX = x;
@@ -20,6 +20,8 @@ public class AbstractBackround {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         if (size == 0) {
+            Path = smallTexturePath;
+        }else if(size == 1){
             Path = bigTexturePath;
         }
         try {
