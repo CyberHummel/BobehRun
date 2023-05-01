@@ -8,8 +8,8 @@ public class SoundPlayer {
     Clip clip;
     Clip BackroundMusic;
     FloatControl fc;
-    public boolean clipCompleted;
-    URL[] soundpaths = new URL[7];
+    public boolean clipCompleted, stopped;
+    URL[] soundpaths = new URL[9];
 
     public SoundPlayer() {
         soundpaths[0] = getClass().getResource("/main/ressources/sounds/CoinPickupSound.wav");
@@ -19,7 +19,10 @@ public class SoundPlayer {
         soundpaths[4] = getClass().getResource("/main/ressources/sounds/BackroundMusic.wav");
         soundpaths[5] = getClass().getResource("/main/ressources/sounds/PunnshSound.wav");
         soundpaths[6] = getClass().getResource("/main/ressources/sounds/JumpSound.wav");
+        soundpaths[7] = getClass().getResource("/main/ressources/sounds/outro.wav");
+        soundpaths[8] = getClass().getResource("/main/ressources/sounds/pigHitSound.wav");
         clipCompleted = false;
+        stopped = false;
     }
 
     public void setFile(int i) {
@@ -27,6 +30,7 @@ public class SoundPlayer {
             AudioInputStream ais = AudioSystem.getAudioInputStream(soundpaths[i]);
             clip = AudioSystem.getClip();
             clip.open(ais);
+            System.out.println("Playing:" + i);
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             throw new RuntimeException(e);
         }
@@ -52,6 +56,14 @@ public class SoundPlayer {
         }
         fc = (FloatControl) BackroundMusic.getControl(FloatControl.Type.MASTER_GAIN);
         fc.setValue(6);
+        if(!stopped){
         BackroundMusic.loop(Clip.LOOP_CONTINUOUSLY);
+        }
+    }
+
+    public void StopAllSound(){
+        stopped = true;
+        BackroundMusic.stop();
+        //clip.stop();
     }
 }

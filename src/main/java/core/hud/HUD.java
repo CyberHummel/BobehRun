@@ -49,8 +49,15 @@ public class HUD { //gesamte Klasse selber
         g2.drawString("COINS:" + Coins, 0, 60);
         HealthBarRender(g2);
         AttackIndicator(g);
-        if (Coins == 10) {
+        if (Coins == 10 ) {
+
             WinScreen(g);
+            if(! won){
+                won = true;
+            w.level.sP.StopAllSound();
+            w.level.sP.setFile(7);
+            w.level.sP.Playsound();
+            }
         }
     }
 

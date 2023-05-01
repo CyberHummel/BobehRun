@@ -47,6 +47,7 @@ public class Player {       //Gestamte Klasse selber geschrieben
     }
 
     public void tick() {
+
         hitBoxFeet.x = (int) x + (width / 3 + 5);
         hitBoxFeet.y = (int) y + (height - 10);
         hitboxBody.x = (int) x + (width / 4);
@@ -163,7 +164,7 @@ public class Player {       //Gestamte Klasse selber geschrieben
 
     public void ItemCollission() {
         for (int i = 0; i < lH.itemM.items.length; i++) {
-            if (hitBoxFeet.intersects(lH.itemM.items[i].hitbox)) {
+            if (hitboxBody.intersects(lH.itemM.items[i].hitbox)) {
                 if (!lH.itemM.items[i].pickedUp) {
                     lH.itemM.items[i].pickUp(this);
                     lH.sP.setFile(0);
@@ -213,6 +214,8 @@ public class Player {       //Gestamte Klasse selber geschrieben
         for (int i = 0; i < lH.npcH.enemies.length; i++) {
             if (hitboxBody.intersects(lH.npcH.enemies[i].hitboxBody)) {
                 canAttack_Q = false;
+                lH.sP.setFile(8);
+                lH.sP.Playsound();
                 lH.hud.canPlayerAttack = false;
                 lH.npcH.enemies[i].health -= attackDamage_Q;
                 if (lH.npcH.enemies[i].direction == -1) {
@@ -222,6 +225,7 @@ public class Player {       //Gestamte Klasse selber geschrieben
                 }
                 if (lH.npcH.enemies[i].health <= 0) {
                     lH.npcH.enemies[i].dead = true;
+                    lH.hud.Coins += 2;
                 }
                 if (lH.npcH.enemies[i].dead) {
                     lH.sP.setFile(3);
