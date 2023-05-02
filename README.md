@@ -2,7 +2,7 @@
 NOTE: This Project is not finished. ;)
 
 # Release:
-The current release date is RELEASED (only unexported)
+The current release date is RELEASED
 
 # Contriutors:
 CyberHummel
