@@ -44,14 +44,15 @@ public class Tile_Manager { //alles selber bis auf readlevelData()
             tileGrassTopRightImage = ImageIO.read(new BufferedInputStream(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Grass_TopRight.png"))));
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Error at loading TileImages from");
         }
     }
 
     public void readLevelData(String path) {
         System.out.println("Reading Level Data from:" + path);
         try {
-            File file = new File(Objects.requireNonNull(getClass().getResource(path)).getPath());
-            BufferedReader br = new BufferedReader(new FileReader(file));
+            InputStream file = getClass().getResourceAsStream(path);
+            BufferedReader br = new BufferedReader(new InputStreamReader(file));
             int col = 0;
             int row = 0;
             while (col < maxCols && row < maxRows) {
@@ -73,7 +74,7 @@ public class Tile_Manager { //alles selber bis auf readlevelData()
             System.out.println(Arrays.deepToString(mapTileNum));
 
         } catch (Exception e) {
-            System.out.println("ERROR could not read file");
+            System.out.println("ERROR could not read file" + e);
         }
     }
 

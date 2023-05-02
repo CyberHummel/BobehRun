@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="BobehRun:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/BobehRun_jar</output-path>
+    <root id="archive" name="BobehRun.jar">
+      <element id="module-output" name="BobehRun" />
+      <element id="module-source" name="BobehRun" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src" />
+    </root>
+  </artifact>
+</component>

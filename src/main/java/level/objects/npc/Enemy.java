@@ -32,7 +32,7 @@ public class Enemy extends Thread {
     public int direction = 0;
     int spriteNum = 1;
 
-    public Enemy(int x, int y, int sizeX, int sizeY, String texturePath, String texturePath_FLeft1, String texturePath_FLeft2, String texturePath_FRight1, String texturePath_FRight2, LevelHandler lH, int maxDistance) {
+    public Enemy(int x, int y, int sizeX, int sizeY, LevelHandler lH, int maxDistance) {
         this.x = x;
         this.y = y;
         this.sizeY = sizeY;
@@ -42,12 +42,12 @@ public class Enemy extends Thread {
         this.tM = lH.tileM;
         this.maxDistance = maxDistance;
         try {
-            texture = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath)));
-            texture_idle = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath)));
-            texture_left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath_FLeft1)));
-            texture_left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath_FLeft2)));
-            texture_right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath_FRight1)));
-            texture_right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath_FRight2)));
+            texture = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Wildschwein/WildschweinIdle.png")));
+            texture_idle = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Wildschwein/WildschweinIdle.png")));
+            texture_left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Wildschwein/WidschweinFacingLeft1.png")));
+            texture_left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Wildschwein/WildschweinFacingLeft2.png")));
+            texture_right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Wildschwein/WildschweinFacingRight1.png")));
+            texture_right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Wildschwein/WildschweinFacingRight2.png")));
             attackLeft = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Wildschwein/WildschweinAttackLeft.png")));
             attackRight = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/ressources/textures/Wildschwein/WildschweinAttackRight.png")));
         } catch (IOException e) {
